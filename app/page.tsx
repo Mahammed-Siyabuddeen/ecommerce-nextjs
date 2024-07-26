@@ -4,6 +4,7 @@ import Navigation from "./components/Navigation";
 import Slider from "./components/Slider";
 import CategoryList from "./components/CategoryList";
 import Products from "./components/Products";
+import Services from "./components/Services";
 export default function Home() {
   return (
     <div>
@@ -12,6 +13,7 @@ export default function Home() {
       <Slider/>
       <CategoryList/>
       <Products/>
+      <Services/>
     </div>
   );
 }

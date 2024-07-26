@@ -9,4 +9,7 @@
         background-image: url('/images/bg_yellow.jpg');
         height: 450px;
     }
+    .service_div h2{
+        @apply font-semibold uppercase text-xl;
+    }
 }
