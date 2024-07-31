@@ -1,8 +1,8 @@
 'use client'
 import React, { FC } from 'react'
-import SimpleAreaChart from '../components/SimpleAreaChart'
-import DashBoardHeader from '../components/DashBoardHeader'
-import ProductCategorychart from '../components/ProductCategorychart'
+import SimpleAreaChart from '../../components/SimpleAreaChart'
+import DashBoardHeader from '../../components/DashBoardHeader'
+import ProductCategorychart from '../../components/ProductCategorychart'
 
 
 let ProductChartData=[

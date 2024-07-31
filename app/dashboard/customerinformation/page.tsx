@@ -1,4 +1,4 @@
-import CustomersProfile from '@/app/components/CustomersProfile'
+import CustomersProfile from '@/components/CustomersProfile'
 import React from 'react'
 
 const Page = () => {

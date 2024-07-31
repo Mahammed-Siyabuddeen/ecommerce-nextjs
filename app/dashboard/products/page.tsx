@@ -1,4 +1,4 @@
-import ProductRecords from '@/app/components/ProductRecords'
+import ProductRecords from '@/components/ProductRecords'
 import React from 'react'
 
 const Page = () => {
