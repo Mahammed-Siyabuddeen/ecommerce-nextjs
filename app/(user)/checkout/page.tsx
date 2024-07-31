@@ -1,7 +1,7 @@
 'use client'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import StateList from '../components/StateList';
-import CartTotal from '../components/CartTotal';
+import StateList from '../../../components/StateList';
+import CartTotal from '../../../components/CartTotal';
 
 const Page = () => {
     const[name,setName]=useState<string>("");

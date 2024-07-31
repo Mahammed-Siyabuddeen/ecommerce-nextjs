@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
-import CartItem from '../components/cartItem'
-import CartTotal from '../components/CartTotal'
-import Header from '../components/Header'
+import CartItem from '../../../components/cartItem'
+import CartTotal from '../../../components/CartTotal'
+import Header from '../../../components/Header'
 const Page: FC = () => {
   return (
     <div className="">
-      <Header/>
       <div className="container mx-auto">
         <h1 className='text-3xl font-bold text-center my-14'>Cart</h1>
         <div className="flex mx-auto w-4/5 justify-between">
