@@ -1,14 +1,15 @@
 import React, { FC } from 'react'
 import { SemiStarIcon } from './Icons/StarIcon'
+import Image from 'next/image'
 
 const Products: FC = () => {
     return (
         <div className='container mx-auto py-3'>
-            <h1 className=" font-semibold text-2xl py-2">Popular Products</h1>
+            <h1 className=" font-semibold text-2xl py-2"> Products</h1>
             <div className="grid  gap-5 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
                 <div className="p-3 rounded-sm">
-                    <div className="max-h-64 bg-slate-200">
-                        <img className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
+                    <div className="h-64  relative bg-white">
+                        <Image fill className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
                     </div>
                     <div className='flex flex-col gap-1'>
                         <h3 className='font-semibold pt-2'>Product Name Will Be Here</h3>
@@ -24,8 +25,8 @@ const Products: FC = () => {
                     </div>
                 </div>
                 <div className="p-3 rounded-sm">
-                    <div className="max-h-64 bg-slate-200">
-                        <img className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
+                    <div className="h-64  relative w-full bg-white">
+                        <Image fill  className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
                     </div>
                     <div className='flex flex-col gap-1'>
                         <h3 className='font-semibold pt-2'>Product Name Will Be Here</h3>
@@ -41,8 +42,8 @@ const Products: FC = () => {
                     </div>
                 </div>
                 <div className="p-3 rounded-sm">
-                    <div className="max-h-64 bg-slate-200">
-                        <img className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
+                    <div className="h-64  relative bg-white">
+                        <Image fill  className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
                     </div>
                     <div className='flex flex-col gap-1'>
                         <h3 className='font-semibold pt-2'>Product Name Will Be Here</h3>
@@ -58,8 +59,8 @@ const Products: FC = () => {
                     </div>
                 </div>
                 <div className="p-3 rounded-sm">
-                    <div className="max-h-64 bg-slate-200">
-                        <img className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
+                    <div className="h-64  relative bg-white">
+                        <Image fill  className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
                     </div>
                     <div className='flex flex-col gap-1'>
                         <h3 className='font-semibold pt-2'>Product Name Will Be Here</h3>
