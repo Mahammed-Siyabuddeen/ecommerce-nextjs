@@ -33,7 +33,7 @@ const GoogleLoginComponent = () => {
 
     }
   return (
-    <GoogleOAuthProvider  clientId='734516501673-tmvvlb23d5levqadblop6fq76tjq0vt4.apps.googleusercontent.com'>
+    <GoogleOAuthProvider  clientId={process.env.GOOGLE_CLIENT_ID}>
     <GoogleLogin 
         onSuccess={(credentialResponse: CredentialResponse) => handleAuthSuccess(credentialResponse)}
         onError={() => console.log('error in google auth')}
