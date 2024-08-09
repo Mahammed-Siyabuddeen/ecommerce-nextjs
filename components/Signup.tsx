@@ -1,34 +1,61 @@
-import React, { useState,FormEvent,ChangeEvent } from 'react'
+'use client';
+import React, { useState, FormEvent, ChangeEvent } from 'react'
 import { EyeClosedIcon } from './Icons/EyeClosedIcon';
 import { EyeOpenIcon } from './Icons/EyeOpenIcon';
 import { GoogleIcon } from './Icons/GoogleIcon';
+import { SignUpApi } from '@/Services/signUp.service';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/features/redux/store';
+import { setUser } from '@/features/authSlice';
+import { useRouter } from 'next/navigation';
+import GoogleLoginComponent from './GoogleLogin';
 
 const Signup = () => {
-  const [isOpen, setIsOpne] = useState<boolean>(false);
-    const [fname, setfname] = useState('')
-    const [lname, setlname] = useState('')
-    const [phone, setphone] = useState<number>()
+    const [isOpen, setIsOpne] = useState<boolean>(false);
+    const [first_name, setfname] = useState('')
+    const [last_name, setlname] = useState('')
+    const [phone_number, setphone] = useState<string>('')
     const [email, setemail] = useState('')
     const [password, setpassword] = useState('')
     const [rpassword, setrpassword] = useState('')
     const [checkinput, setcheckinput] = useState(false)
 
+    const Dispatch = useDispatch<AppDispatch>();
+    const router = useRouter()
     const handlesubmit = (e: FormEvent) => {
         e.preventDefault();
         setcheckinput(true);
-        if(fname.length<0 ||lname.length<0|| email.length<0||password.length|| password!==rpassword||phone==undefined)
+
+        const data = {
+            first_name,
+            last_name,
+            phone_number,
+            email,
+            password
+        }
+
+        if (first_name.length < 0 || last_name.length < 0 || email.length < 0 || password.length < 0 || password !== rpassword)
             return;
 
+        SignUpApi({ ...data }).then(({ data }) => {
+            console.log(data);
+            Dispatch(setUser(data));
+            router.push('/')
+        }).catch((err) => {
+            console.log(err);
 
+        })
     }
-  return (
-    <form method='post' onSubmit={(e: FormEvent) => handlesubmit(e)} className="container ml-auto mr-auto w-3/6 my-12 flex flex-col gap-4">
+
+
+    return (
+        <form method='post' onSubmit={(e: FormEvent) => handlesubmit(e)} className="container ml-auto mr-auto w-3/6 my-12 flex flex-col gap-4">
             <div>
                 <h1 className='text-3xl font-semibold'>Signup</h1>
             </div>
 
-            <div className='shadow-sm'>
-                <button className="w-full p-3 font-medium items-center rounded-md flex gap-3 justify-center border border-slate-400"><GoogleIcon />Login with Google</button>
+            <div className='shadow-sm flex justify-center py-4'>
+                <GoogleLoginComponent />
             </div>
 
             <div className='text-center text-slate-400'>or Signup with Email</div>
@@ -36,19 +63,19 @@ const Signup = () => {
             <div className=" font-medium gap-1 flex  shadow-sm  w-fll">
                 <div className='basis-2/4 flex flex-col gap-1 '>
                     <label htmlFor="">First Name</label>
-                    <input value={fname} onChange={(e: ChangeEvent<HTMLInputElement>) => setfname(e.target.value)} placeholder='enter first name' name='fname' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && fname.length < 1 ? 'border-red-500' : ''}`} />
+                    <input value={first_name} onChange={(e: ChangeEvent<HTMLInputElement>) => setfname(e.target.value)} placeholder='enter first name' name='first_name' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && first_name.length < 1 ? 'border-red-500' : ''}`} />
 
                 </div>
                 <div className='basis-2/4 flex flex-col gap-1'>
                     <label htmlFor="">Last name</label>
-                    <input value={lname} onChange={(e: ChangeEvent<HTMLInputElement>) => setlname(e.target.value)} placeholder='enter last name' name='lname' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && lname.length < 1 ? 'border-red-500' : ''}`} />
+                    <input value={last_name} onChange={(e: ChangeEvent<HTMLInputElement>) => setlname(e.target.value)} placeholder='enter last name' name='last_name' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && last_name.length < 1 ? 'border-red-500' : ''}`} />
 
                 </div>
             </div>
             <div className=" font-medium gap-1 flex shadow-sm w-full">
                 <div className='basis-2/4 flex flex-col gap-1'>
-                    <label htmlFor="">Phone</label>
-                    <input value={phone} onChange={(e: ChangeEvent<HTMLInputElement>) => setphone(Number(e.target.value))} placeholder='enter your number' name='phone' type="tel" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && phone == undefined ? 'border-red-500' : ''}`} />
+                    <label htmlFor="">phone_number</label>
+                    <input value={phone_number} onChange={(e: ChangeEvent<HTMLInputElement>) => setphone(e.target.value)} pattern="[7-9]{1}[0-9]{4}[0-9]{5}" placeholder='enter your number' name='phone_number' type="tel" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && phone_number == undefined ? 'border-red-500' : ''}`} />
 
                 </div>
                 <div className='basis-2/4 flex flex-col gap-1'>
@@ -80,10 +107,10 @@ const Signup = () => {
             </div>
             <button type='submit' className="text-center bg-yellow-400  p-3 rounded-md ">Signup</button>
             <div className="text-center">
-                <p>not registered yet?<span className=' text-yellow-400 cursor-pointer'> Create account</span></p>
+                <p>Do you have account?<span className=' text-yellow-400 cursor-pointer' onClick={()=>router.push('/login')}> Login</span></p>
             </div>
         </form>
-  )
+    )
 }
 
 export default Signup
