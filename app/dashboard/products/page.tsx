@@ -1,9 +1,17 @@
+'use client';
+import AddProduct from '@/components/AddProduct'
 import ProductRecords from '@/components/ProductRecords'
-import React from 'react'
+import React, { useState } from 'react'
 
 const Page = () => {
+  const [addProduct, setAddproduct] = useState<boolean>(false)
+console.log(addProduct);
+
+  if (addProduct)
+    return (<AddProduct />)
+
   return (
-    <ProductRecords />
+    <ProductRecords setAddproduct={setAddproduct} />
   )
 }
 

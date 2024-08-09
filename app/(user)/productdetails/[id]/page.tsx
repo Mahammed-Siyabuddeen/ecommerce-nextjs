@@ -1,16 +1,16 @@
-'use client'
-import React, { useState } from 'react'
-import { ShopButton } from '../../../../components/ShopButton'
-import { ShopIcon } from '../../../../components/Icons/ShopIcon'
-import Image from 'next/image'
+import React from 'react'
 import ProductDetails from '@/components/ProductDetails'
-import Header from '@/components/Header'
+import { getProductDetails } from '@/Services/products.services'
+import { productType } from '@/components/Types/productType';
 
-const Page = () => {
+const Page =async ({params}:{params:{id:string}}) => {
+  console.log(params.id);
+  const {data}:{data:productType}=await getProductDetails(params.id)
+  console.log(data);
   
   return (
     <div>
-      <ProductDetails/>
+      <ProductDetails productdetials={data}/>
     </div>
   )
 }

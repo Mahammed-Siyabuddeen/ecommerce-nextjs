@@ -1,8 +1,26 @@
-import React, { FC } from 'react'
+'use client'
+import React, { FC, useEffect } from 'react'
 import CartItem from '../../../components/cartItem'
 import CartTotal from '../../../components/CartTotal'
 import Header from '../../../components/Header'
+import { getcartItems } from '@/Services/cart.service'
+import ApiErrorResponse from '@/Services/ApiErrorResponse'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/features/redux/store'
+import { cartType } from '@/components/Types/cartType'
+import { setCartItems } from '@/features/cartSlice'
 const Page: FC = () => {
+  const user = useSelector((state: RootState) => state.user);
+  const cart = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (!user._id) return;
+    getcartItems({ user_id: user._id }).then(({ data }: { data: cartType[] }) => {
+      console.log(data);
+      dispatch(setCartItems(data));
+    }).catch((error) => ApiErrorResponse(error))
+  }, [dispatch, user])
   return (
     <div className="">
       <div className="container mx-auto">
@@ -17,9 +35,12 @@ const Page: FC = () => {
               <p className='font-medium w-1/6 items-center text-center'>total</p>
               <p className='w-1/6 items-center text-center'>close</p>
             </div>
-            <CartItem />
-            <CartItem />
-            <CartItem />
+            {
+              cart.map((items: cartType) => (
+
+                <CartItem key={items._id} items={items} />
+              ))
+            }
 
           </div>
 

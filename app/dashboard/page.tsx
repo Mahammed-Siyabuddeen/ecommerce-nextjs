@@ -19,7 +19,7 @@ let CustomerChartData=[
 ]
 const Page: FC = () => {
     return (
-        <div className="basis-4/5 flex flex-col gap-5  p-4 pt-8   bg-gray-100 overflow-y-scroll ">
+        <div className="w-full flex flex-col gap-5  p-4 pt-8   bg-gray-100 overflow-y-scroll ">
             <div className="flex min-h-40 w-full  justify-evenly ">
                 <DashBoardHeader />
             </div>
