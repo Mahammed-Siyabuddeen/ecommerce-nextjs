@@ -2,9 +2,18 @@ import React from 'react'
 import ProductRecord from './ProductRecord'
 import { SearchIcon } from './Icons/SearchIcon'
 
-const ProductRecords = () => {
+interface prop{
+    setAddproduct:React.Dispatch<React.SetStateAction<boolean>>
+}
+const ProductRecords = ({setAddproduct}:prop) => {
+
+    const switchToAddProduct=()=>{
+        console.log('hi');
+        
+        setAddproduct(true);
+    }
     return (
-        <div className="basis-4/5">
+        <div className="w-full">
             <div>
                 <div className="flex justify-between p-6 items-center">
                     <h1 className="font-bold text-xl">All Product</h1>
@@ -13,10 +22,10 @@ const ProductRecords = () => {
                     <div className="basis-2/4 ">
                         <div className="flex w-4/5 border rounded-md overflow-hidden ">
                             <input placeholder='search product' type="text" className="w-4/5 border-r outline-none" />
-                            <button className="w-1/5  p-2 bg-black text-white text-2xl flex  justify-center  "><SearchIcon /></button>
+                            <button  className="w-1/5  p-2 bg-black text-white text-2xl flex  justify-center  "><SearchIcon /></button>
                         </div>
                     </div>
-                    <button className="max-w-fit px-2 py-3 bg-black text-white  m-2  rounded-lg flex gap-1 items-center border">Add Product</button>
+                    <button onClick={switchToAddProduct} className="max-w-fit px-2 py-3 bg-black text-white  m-2  rounded-lg flex gap-1 items-center border">Add Product</button>
                 </div>
                 <div className=" overflow-x-scroll overflow-y-scroll h-full border-t">
                     <table className="w-full  text-left text-sm">
