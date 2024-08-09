@@ -4,7 +4,7 @@ import { Arrowdown } from './Icons/Arrowdown'
 
 const AllOrders = () => {
     return (
-        <div className="basis-4/5">
+        <div className="w-full">
             <div>
                 <div className="flex justify-between p-6 items-center">
                     <h1 className="font-bold text-xl">Orders</h1>

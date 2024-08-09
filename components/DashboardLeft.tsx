@@ -5,6 +5,7 @@ import { OrderIcon } from './Icons/OrderIcon'
 import { MultiplyIcon } from './Icons/MultiplyIcon'
 import { DashboardIcon } from './Icons/DasboardIcon'
 import Link from 'next/link'
+import { CatergoryIcon } from './Icons/CategoryIcon'
 
 const DashboardLeft:FC = () => {
   return (
@@ -28,6 +29,10 @@ const DashboardLeft:FC = () => {
     <div className="flex gap-1 items-center cursor-pointer hover:bg-gray-200 p-3 m-2 rounded-sm">
         <CustomerIcon/>
         <Link href='/dashboard/customerinformation'  className="font-medium">Customers</Link>
+    </div>
+    <div className="flex gap-1 items-center cursor-pointer hover:bg-gray-200 p-3 m-2 rounded-sm">
+       <div className='text-blue-900'> <CatergoryIcon/></div>
+        <Link href='/dashboard/categories'  className="font-medium">Categories</Link>
     </div>
 </div>
   )

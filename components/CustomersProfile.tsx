@@ -3,7 +3,7 @@ import React from 'react'
 
 const CustomersProfile = () => {
     return (
-        <div className="basis-4/5  p-4">
+        <div className="w-full p-4">
             <h1 className="text-xl font-bold my-4">Customer Information</h1>
             <div className=" overflow-x-scroll overflow-y-scroll h-full border-t">
                 <table className="w-full  text-left ">

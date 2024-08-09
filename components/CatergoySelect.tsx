@@ -1,21 +1,20 @@
 import React, { ChangeEvent, FC, SetStateAction } from 'react'
-import { categoryType } from './CategoryType'
+import { categoryType } from './Types/categoryType'
 
 interface prop {
-    category: string,
-    setCategory:React.Dispatch<SetStateAction<categoryType>>
+  category: string,
+  setCategory: React.Dispatch<React.SetStateAction<string>>,
+  categoryList: categoryType[]
 }
-const CatergoySelect:FC<prop> = ({category,setCategory}) => {
+const CatergoySelect: FC<prop> = ({ category, setCategory, categoryList }) => {
   return (
-    <select className='w-full p-4 outline-none bg-inherit border my-2' value={category} onChange={(e:ChangeEvent<HTMLSelectElement>)=>setCategory(e.target.value)}>
-        <option value="Book">Bookes</option>
-        <option value="Electronics">Electronics</option>
-        <option value="Furniture">Furniture</option>
-        <option value="Mens">Mens</option>
-        <option value="Womens">Womens</option>
-        <option value="Shoes">Shoes</option>
-        <option value="Sports">Sports</option>
-        <option value="Toys">Toys</option>
+    <select required className='w-full p-4 outline-none bg-inherit border my-2' value={category} onChange={(e: ChangeEvent<HTMLSelectElement>) => setCategory(e.target.value)}>
+      {
+        categoryList.map((data: categoryType) => (
+          <option key={data._id} value={data._id}>{data.name}</option>
+
+        ))
+      }
     </select>
   )
 }
