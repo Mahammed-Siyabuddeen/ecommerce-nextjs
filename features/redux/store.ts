@@ -3,13 +3,15 @@ import authSlice from "../authSlice";
 import categorySlice from "../categorySlice";
 import productSlice from "../productSlice";
 import cartSlice from "../cartSlice";
+import checkoutSlice from "../checkoutSlice";
 
 export const store = configureStore({
     reducer: {
         user: authSlice,
         category:categorySlice,
         proudcts:productSlice,
-        cart:cartSlice
+        cart:cartSlice,
+        checkout:checkoutSlice,
     }
 })
 
