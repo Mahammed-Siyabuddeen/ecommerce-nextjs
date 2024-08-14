@@ -1,6 +1,7 @@
+import { addressType } from "@/components/Types/addressType";
 import { fecthData } from "./fecthData";
 
-interface getClientSecretprop{
+interface getClientSecretprop extends addressType{
     amount:number,
     user_id:string,
     cart_id:string
