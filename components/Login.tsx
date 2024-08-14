@@ -12,6 +12,7 @@ import { googleAuth } from '@/Services/googleAuth.services';
 import { useRouter } from 'next/navigation';
 import GoogleLoginComponent from './GoogleLogin';
 import { LoginApi } from '@/Services/login.service';
+import ApiErrorResponse from '@/Services/ApiErrorResponse';
 
 const Login: FC = () => {
     const [isOpen, setIsOpne] = useState<boolean>(false);
@@ -25,10 +26,7 @@ const Login: FC = () => {
         LoginApi({ email, password }).then(({ data }) => {
             Dispatch(setUser(data))
             router.push('/')
-        }).catch(err => {
-            console.log(err);
-
-        })
+        }).catch(err =>ApiErrorResponse(err) )
 
     }
     return (

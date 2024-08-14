@@ -2,12 +2,13 @@ import Image from 'next/image'
 import React, { FC } from 'react'
 import { SemiStarIcon } from './Icons/StarIcon'
 import { productType } from './Types/productType'
+import Link from 'next/link'
 
 
 const Product = ({ color, productinfo }: { color: string, productinfo: productType }) => {
   if (!productinfo) return <>proudct not found</>
   return (
-    <div className="p-3 rounded-sm">
+    <Link href={`/productdetails/${productinfo._id}`} className="p-3 rounded-sm">
       <div className={`h-64  relative ${color == "white" ? 'bg-white' : 'bg-slate-200'}`}>
         <Image fill className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
       </div>
@@ -23,7 +24,7 @@ const Product = ({ color, productinfo }: { color: string, productinfo: productTy
           <p>&#8377; {productinfo.price}</p>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

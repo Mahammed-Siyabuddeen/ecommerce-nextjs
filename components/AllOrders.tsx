@@ -1,10 +1,25 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import OrderItem from './OrderItem'
 import { Arrowdown } from './Icons/Arrowdown'
+import { getAllOrders } from '@/Services/getAllOrders.service'
+import ApiErrorResponse from '@/Services/ApiErrorResponse'
+import { allOrderType } from './Types/allOrderType'
 
 const AllOrders = () => {
+    const[loading,setLoading]=useState(false);
+    const [orders,setOrders]=useState<allOrderType[]>([])
+    useEffect(()=>{
+        setLoading(true);
+        getAllOrders().then(({data})=>{
+            setOrders(data);
+        }).catch((err)=>ApiErrorResponse(err))
+        setLoading(false)
+    },[])
+    console.log(orders);
+    
     return (
-        <div className="w-full">
+        <div className="w-full no-scrollbar">
             <div>
                 <div className="flex justify-between p-6 items-center">
                     <h1 className="font-bold text-xl">Orders</h1>
@@ -17,37 +32,25 @@ const AllOrders = () => {
                 </div>
             </div>
             <div className="relative overflow-x-scroll overflow-y-scroll h-full border-t">
-                <table className="w-full  text-left text-sm">
+                <table className="w-full table-fixed  text-left text-sm">
                     <thead className="text-gray-700 uppercase text-xs mb-3">
                         <th className="px-6 py-3">Order</th>
-                        <th className="px-6 py-3">Customer</th>
-                        <th className="px-6 py-3">Type</th>
-                        <th className="px-6 py-3">Status</th>
                         <th className="px-6 py-3">Product</th>
+                        <th className="px-6 py-3">Customer</th>
+                        <th className="px-6 py-3">Email</th>
                         <th className="px-6 py-3">Total</th>
+                        <th className="px-6 py-3">Quantity</th>
                         <th className="px-6 py-3">Date</th>
+                        <th className="px-6 py-3">Status</th>
                     </thead>
                     <tbody>
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
-                        <OrderItem Order={'#90893'} Customer={'chark mahn'} Type={'fd'} Status='Paid' Product='namdk' Total={450} Date='june 17' />
+                        {
+                            orders.map((order:allOrderType)=>(
 
+                                <OrderItem key={order.prouduct_id} order={order}/>
+                            ))
+                        }
+                        
                     </tbody>
                 </table>
             </div>

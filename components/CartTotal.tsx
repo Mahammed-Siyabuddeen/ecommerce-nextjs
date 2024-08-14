@@ -7,17 +7,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/features/redux/store'
 import { cartType } from './Types/cartType'
 import { setTotalAmount } from '@/features/checkoutSlice'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 function CartTotal() {
-    const dispatch=useDispatch<AppDispatch>()
-    const router=useRouter()
-    const cart=useSelector((state:RootState)=>state.cart)
-    const checkout=useSelector((state:RootState)=>state.checkout)
-    let s=cart.reduce((total:number,item:cartType)=>total+item.total,0)
-    useEffect(()=>{
+    const dispatch = useDispatch<AppDispatch>();
+
+    const router = useRouter();
+    const pathname = usePathname()
+    console.log(pathname);
+
+    const cart = useSelector((state: RootState) => state.cart)
+    const checkout = useSelector((state: RootState) => state.checkout)
+    let s = cart.reduce((total: number, item: cartType) => total + item.total, 0)
+    useEffect(() => {
         dispatch(setTotalAmount(s))
-    },[s,dispatch])    
+    }, [s, dispatch])
     return (
         <div className="p-3 flex flex-col gap-4 border">
             <div>
@@ -25,13 +29,32 @@ function CartTotal() {
             </div>
             <div className="flex justify-between">
                 <h2>Sub-Total</h2>
-                <p className="text-slate-400">{checkout.total_amount}</p>
+                <p className="text-slate-400">{checkout.sub_total}</p>
             </div>
             <div className="flex justify-between">
                 <h2>delivery</h2>
-                <p className="text-slate-400">50</p>
+                <p className="text-slate-400">{checkout.delivery_amount}</p>
             </div>
-            <div><button onClick={()=>router.push('/checkout')} className="bg-yellow-400 p-3 w-full text-white">Check out</button></div>
+            <div className="flex justify-between font-bold">
+                <h2 >Total</h2>
+                <p className="text-slate-400">{checkout.total_amount}</p>
+            </div>
+            <div>
+                {
+                    pathname === '/checkout' ?
+                        (
+                            <button type='submit' className="bg-yellow-400 p-3 w-full text-white">
+                                Billing
+                            </button>
+                        )
+
+                        : (
+                            <button onClick={() => router.push('/checkout')} className="bg-yellow-400 p-3 w-full text-white">
+                                Check out
+                            </button>
+                        )
+                }
+            </div>
             <div className="flex justify-evenly">
                 <div className=""><RazorpayIcon /></div>
                 <div className=""><StripeIcon /></div>

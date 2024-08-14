@@ -5,7 +5,7 @@ interface prop {
 }
 const StateList: FC<prop> = ({state,setState}) => {
     return (
-        <select value={state} onChange={(e:ChangeEvent<HTMLSelectElement>)=>setState(e.target.value)} className="w-full p-3 border outline-none bg-inherit" name='state' >
+        <select required value={state} onChange={(e:ChangeEvent<HTMLSelectElement>)=>setState(e.target.value)} className="w-full p-3 border outline-none bg-inherit" name='state' >
             <option value="AP">Andhra Pradesh</option>
             <option value="AR">Arunachal Pradesh</option>
             <option value="AS">Assam</option>

@@ -1,6 +1,7 @@
 import React from 'react'
+import { addressType } from './Types/addressType'
 
-const OrderAddress = () => {
+const OrderAddress = ({address}:{address:addressType}) => {
     return (
         <div className="flex bg-gray-100  rounded p-8 ">
             <div className="basis-3/5 flex flex-col gap-3">
@@ -8,12 +9,12 @@ const OrderAddress = () => {
                     Delivery Address
                 </h1>
                 <p className="font-medium">
-                    shihab
+                    {address.name}
                 </p>
-                <p>kudmar junction savanoor, Puttur 574202, Karnataka</p>
+                <p>{address.street}, {address.city} {address.zipcode}, {address.state}</p>
                 <div className="flex flex-col">
                     <p className="font-medium">Phone number</p>
-                    <p>8980890890</p>
+                    <p>{address.phone}</p>
                 </div>
             </div>
             <div className="basis-2/5 flex flex-col gap-3 font-medium">

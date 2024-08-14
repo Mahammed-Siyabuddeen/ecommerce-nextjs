@@ -16,7 +16,6 @@ const Products= ({products}:{products:productType[]}) => {
     useEffect(()=>{
         dispatch(addProducts(products))
     },[dispatch,products])
-    // useSelector((state:RootState)=>state.category)
     return (
         <div className='container mx-auto py-3'>
             <h1 className=" font-semibold text-2xl py-2"> Products</h1>

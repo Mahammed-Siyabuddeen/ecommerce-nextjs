@@ -22,6 +22,8 @@ const ProductDetails = ({ productdetials }: { productdetials: productType }) => 
       ApiErrorResponse(error)
     }
   }
+  console.log(productdetials);
+  
   return (
     <div className=" flex items-center bg-orange-100">
       <div className="basis-2/4 bg-slate-100  h-dvh">
