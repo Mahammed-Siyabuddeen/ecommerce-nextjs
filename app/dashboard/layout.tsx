@@ -7,9 +7,9 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
       <DashboardLeft />
       <div className="basis-4/5 flex">
         {children}
-        <div className="basis-1/5 border-l ">
-
-        </div>
+      </div>
+      <div className="basis-1/5 border-l ">
+        <h1>llfd</h1>
       </div>
     </div>
   )

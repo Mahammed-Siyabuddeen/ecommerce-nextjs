@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 
 const Page = () => {
   const [errorMessage, setErrorMessage] = useState('');
-  const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
+  const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string);
   const handleSubmit = () => {
 
   }

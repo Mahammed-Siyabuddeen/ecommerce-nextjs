@@ -1,12 +1,30 @@
+'use client'
 import { getAllProductsapi } from '@/Services/products.services';
 import { Arrowdown } from '@/components/Icons/Arrowdown'
+import Loading from '@/components/Loading';
 import Products from '@/components/Products'
 import { productType } from '@/components/Types/productType';
-import React, { FC } from 'react'
+import {  useSearchParams } from 'next/navigation';
+import React, { FC, use, useEffect, useState } from 'react'
 
-const page =async ({params}:{params:{category:string}}) => {
-    
-    const {data}:{data:productType[]}=await getAllProductsapi();
+const page = () => {
+    const [data,setData]=useState<productType[]>([])
+    const[loading,setLoading]=useState(true)
+    const searchParams=useSearchParams()
+    const searchByName=searchParams.get('name')
+    const searchByCategory=searchParams.get('category')
+    useEffect(()=>{
+        setLoading(true)
+        getAllProductsapi({name:searchByName||undefined,category:searchByCategory||undefined})
+        .then(({data})=>{
+            console.log(data);
+            
+            setData(data)
+        })
+        .catch((err)=>console.log(err)
+        )
+        setLoading(false)
+    },[searchParams])
     console.log(data);
     
     return (
@@ -43,7 +61,10 @@ const page =async ({params}:{params:{category:string}}) => {
             <div className="basis-4/5 bg-gray-100 flex flex-col  gap-4 rounded p-4">
                 <>
                     {/* each order */}
-                    <Products products={data}/>
+                    {
+                        loading?(<Loading/>):(<Products products={data}/>)
+                    }
+                    
 
                 </>
             </div>
