@@ -3,13 +3,52 @@
 @tailwind utilities;
 
 
-@layer base{
-  
-    .slider_bg{
+@layer base {
+
+    .slider_bg {
         background-image: url('/images/bg_yellow.jpg');
         height: 450px;
     }
-    .service_div h2{
+
+    .service_div h2 {
         @apply font-semibold uppercase text-xl;
     }
+
+    .animation_circle {
+        stroke-dasharray: 1194;
+        stroke-dashoffset: 1194;
+        animation: dc 1s ease-in-out;
+        animation-fill-mode: forwards;
+    }
+
+    .animation_tick {
+        stroke-dasharray: 350;
+        stroke-dashoffset: 350;
+        animation: dt 0.8s ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 0.95s;
+    }
+
+    @keyframes dc {
+        from {
+            stroke-dashoffset: 1194;
+        }
+
+        to {
+            stroke-dashoffset: 2388;
+        }
+    }
+
+    @keyframes dt {
+        from {
+            stroke-dashoffset: 350;
+        }
+
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+}
+html::-webkit-scrollbar{
+    display: none;
 }
