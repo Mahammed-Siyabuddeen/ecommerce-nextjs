@@ -4,6 +4,8 @@ import categorySlice from "../categorySlice";
 import productSlice from "../productSlice";
 import cartSlice from "../cartSlice";
 import checkoutSlice from "../checkoutSlice";
+import addressSlice from "../addressSlice";
+import orderDetailsSlice from "../orderDetailsSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,6 +14,8 @@ export const store = configureStore({
         proudcts:productSlice,
         cart:cartSlice,
         checkout:checkoutSlice,
+        address:addressSlice,
+        orderDetails:orderDetailsSlice,
     }
 })
 

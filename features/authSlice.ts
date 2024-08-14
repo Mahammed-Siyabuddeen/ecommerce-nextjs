@@ -1,32 +1,44 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { jwtDecode } from "jwt-decode";
 
-interface user{
-    _id:string,
-    first_name:string,
-    email:string,
-    token:string,
-    last_name?:string,
-    phone_number?:string[],
+export interface userType {
+    _id: string,
+    first_name: string,
+    email: string,
+    token: string,
+    last_name?: string,
+    phone_number?: string[],
 }
-const initialState=():user=>{
-    if(typeof window !=='undefined'){
-       const storedState= window.localStorage.getItem('profile')
-       if(storedState)
-        return JSON.parse(storedState)
+const initialState = (): userType => {
+    if (typeof window !== 'undefined') {
+        const storedState = window.localStorage.getItem('profile')
+        if (storedState) {
+            const user: userType = JSON.parse(storedState)
+            console.log(user.token);
+            const token = jwtDecode(user.token);
+            if ((token.exp as number) * 1000 < new Date().getTime()) {
+                localStorage.removeItem('profile');
+            } else {
+                return user;
+            }
+
+        }
     }
-    return {_id:'',first_name:'',email:'',token:''}
+    return { _id: '', first_name: '', email: '', token: '' }
 }
- const authSlice=createSlice(
+const authSlice = createSlice(
     {
-        name:'auth',
+        name: 'auth',
         initialState,
-        reducers:{
-            setUser:(state,action:PayloadAction<user>)=>{
-                localStorage.setItem('profile',JSON.stringify(action.payload));
-                
-                    return action.payload;                
+        reducers: {
+            setUser: (state, action: PayloadAction<userType>) => {
+                localStorage.setItem('profile', JSON.stringify(action.payload));
+
+                return action.payload;
             },
-            clearUser:(state,action)=>{
+            clearUser: (state) => {
+                console.log('clering user');
+
                 localStorage.removeItem('profile')
                 // return state
             }
@@ -34,5 +46,5 @@ const initialState=():user=>{
     }
 )
 
-export const {setUser}=authSlice.actions;
+export const { setUser, clearUser } = authSlice.actions;
 export default authSlice.reducer

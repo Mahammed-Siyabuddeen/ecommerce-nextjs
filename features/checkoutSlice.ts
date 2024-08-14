@@ -2,14 +2,19 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 
 const initialState={
-    total_amount:0
+    total_amount:0,
+    sub_total:0,
+    delivery_amount:50
 }
+
 const checkoutSlice=createSlice({
     name:'cart',
     initialState,
     reducers:{
         setTotalAmount:(state,action:PayloadAction<number>)=>{
-            state.total_amount=action.payload;
+            state.sub_total=action.payload;
+            state.total_amount=state.delivery_amount+state.sub_total
+
         }
     }
 })
