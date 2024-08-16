@@ -5,18 +5,24 @@ import { Arrowdown } from './Icons/Arrowdown'
 import { getAllOrders } from '@/Services/getAllOrders.service'
 import ApiErrorResponse from '@/Services/ApiErrorResponse'
 import { allOrderType } from './Types/allOrderType'
+import PopupOrderDetails from './PopupOrderDetails'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAllorders } from '@/features/adminOrderSlice'
+import { RootState } from '@/features/redux/store'
 
 const AllOrders = () => {
+    const dispatch=useDispatch()
+    const AllOrders=useSelector((state:RootState)=>state.AllOrders)
+    const[isOpen,setIsOpen]=useState(false)
     const[loading,setLoading]=useState(false);
-    const [orders,setOrders]=useState<allOrderType[]>([])
+    const[currentOrder,setCurrentOrder]=useState<allOrderType>()
     useEffect(()=>{
         setLoading(true);
         getAllOrders().then(({data})=>{
-            setOrders(data);
+            dispatch(setAllorders(data))
         }).catch((err)=>ApiErrorResponse(err))
         setLoading(false)
     },[])
-    console.log(orders);
     
     return (
         <div className="w-full no-scrollbar">
@@ -44,15 +50,16 @@ const AllOrders = () => {
                         <th className="px-6 py-3">Status</th>
                     </thead>
                     <tbody>
-                        {
-                            orders.map((order:allOrderType)=>(
+                        { AllOrders
+                            .map((order:allOrderType)=>(
 
-                                <OrderItem key={order.prouduct_id} order={order}/>
+                                <OrderItem setCurrentOrder={setCurrentOrder} setIsopen={setIsOpen} key={order.prouduct_id} order={order}/>
                             ))
                         }
                         
                     </tbody>
                 </table>
+                <PopupOrderDetails currentOrder={currentOrder} isOpen={isOpen} setIsOpen={setIsOpen} />
             </div>
         </div>
     )

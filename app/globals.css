@@ -28,7 +28,9 @@
         animation-fill-mode: forwards;
         animation-delay: 0.95s;
     }
-
+    .bg_blur{
+        background-color: rgb(249 250 251 / 74%)
+    }
     @keyframes dc {
         from {
             stroke-dashoffset: 1194;
