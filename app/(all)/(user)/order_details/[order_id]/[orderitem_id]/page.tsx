@@ -3,7 +3,7 @@ import { StarIcon } from '@/components/Icons/StarIcon'
 import OrderAddress from '@/components/OrderAddress'
 import { orderDetailsType } from '@/components/Types/orderDetailType'
 import ApiErrorResponse from '@/Services/ApiErrorResponse';
-import { orderDetailById } from '@/Services/oderDetailById'
+import { orderDetailById } from '@/Services/orderDetailById'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams,useRouter } from 'next/navigation'
