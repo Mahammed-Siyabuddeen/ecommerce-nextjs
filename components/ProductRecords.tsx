@@ -1,17 +1,40 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import ProductRecord from './ProductRecord'
 import { SearchIcon } from './Icons/SearchIcon'
+import ApiErrorResponse from '@/Services/ApiErrorResponse'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/features/redux/store'
+import { getAllProducts } from '@/Services/getAllProducts'
+import { allProductSortByQuanity, allProductSortBySales, setAllProdcuts } from '@/features/allProductsSlice'
+import { allProductsType } from './Types/allProductsType'
+import { Arrowdown } from './Icons/Arrowdown'
 
 interface prop{
     setAddproduct:React.Dispatch<React.SetStateAction<boolean>>
 }
 const ProductRecords = ({setAddproduct}:prop) => {
-
+    const Dispatch=useDispatch<AppDispatch>()
+    const [sortOrder,setSortOrder]=useState('asc')
+    const orders=useSelector((state:RootState)=>state.allProducts)
     const switchToAddProduct=()=>{
-        console.log('hi');
-        
         setAddproduct(true);
     }
+    const changesortSales=()=>{
+        Dispatch(allProductSortBySales(sortOrder))
+        setSortOrder(sortOrder==='asc'?'desc':'asc')
+    }
+    const changesortQuantity=()=>{
+        Dispatch(allProductSortByQuanity(sortOrder))
+        setSortOrder(sortOrder==='asc'?'desc':'asc')
+
+    }
+    useEffect(()=>{
+        getAllProducts().then(({data})=>{
+            Dispatch(setAllProdcuts(data))
+        }).catch((error)=>ApiErrorResponse(error))
+    },[setAddproduct])
+
     return (
         <div className="w-full">
             <div>
@@ -25,7 +48,12 @@ const ProductRecords = ({setAddproduct}:prop) => {
                             <button  className="w-1/5  p-2 bg-black text-white text-2xl flex  justify-center  "><SearchIcon /></button>
                         </div>
                     </div>
-                    <button onClick={switchToAddProduct} className="max-w-fit px-2 py-3 bg-black text-white  m-2  rounded-lg flex gap-1 items-center border">Add Product</button>
+                    <div className="flex gap-1">
+                    <button onClick={changesortSales} className="max-w-fit px-4 py-2 bg-black text-white  m-2  rounded-lg flex gap-1 items-center border">Sales <div className="text-lg"><Arrowdown/></div></button>
+                    <button onClick={changesortQuantity} className="max-w-fit px-4 py-2 bg-black text-white  m-2  rounded-lg flex gap-1 items-center border">Quantity<div className="text-lg"><Arrowdown/></div></button>
+                    <button onClick={switchToAddProduct} className="max-w-fit px-2 py-2 bg-black text-white  m-2  rounded-lg flex gap-1 items-center border">Add Product</button>
+
+                    </div>
                 </div>
                 <div className=" overflow-x-scroll overflow-y-scroll h-full border-t">
                     <table className="w-full  text-left text-sm">
@@ -37,10 +65,12 @@ const ProductRecords = ({setAddproduct}:prop) => {
                             <th className="px-6 py-3">Sale</th>
                         </thead>
                         <tbody>
-                            <ProductRecord Product={['dog food kitchen', 'jds']} ProdcutId='#094584' Price={190} Quantity={20094} Sale={700} />
-                            <ProductRecord Product={['dog food kitchen', 'jds']} ProdcutId='#094584' Price={190} Quantity={20094} Sale={700} />
-                            <ProductRecord Product={['dog food kitchen', 'jds']} ProdcutId='#094584' Price={190} Quantity={20094} Sale={700} />
-                            <ProductRecord Product={['dog food kitchen', 'jds']} ProdcutId='#094584' Price={190} Quantity={20094} Sale={700} />
+                            {
+                                orders.map((item:allProductsType)=>(
+                                    <ProductRecord productDetails={item} key={item._id} />
+
+                                ))
+                            }
                         </tbody>
                     </table>
                 </div>

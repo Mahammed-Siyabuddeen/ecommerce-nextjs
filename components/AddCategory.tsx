@@ -6,6 +6,7 @@ import ApiErrorResponse from '@/Services/ApiErrorResponse';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/features/redux/store';
 import { appendCategory } from '@/features/categorySlice';
+import { toast } from 'sonner';
 
 
   
@@ -16,7 +17,7 @@ const AddCategory = () => {
         e.preventDefault();
         addCategory({ name: categoryName}).then(({ data }) => {
             dispatch(appendCategory({...data,totalProduct:0}))
-            
+            toast.success('catergory successully aded')   
         }).catch((error) => {
            ApiErrorResponse(error)
         })

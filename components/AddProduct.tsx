@@ -9,13 +9,25 @@ import { fecthData } from '@/Services/fecthData';
 import axios from 'axios';
 import { getAllCategory } from '@/Services/category.service';
 import { categoryType } from './Types/categoryType';
+import { addProduct } from '@/Services/addProduct.services';
+import { toast } from 'sonner';
+import ApiErrorResponse from '@/Services/ApiErrorResponse';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/features/redux/store';
+import { appendToAllProducts } from '@/features/allProductsSlice';
+import Loading from './Loading';
 
 interface checkboxData {
     label: string,
     checked: boolean,
 }
+interface prop {
+    setAddproduct: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const AddProduct: FC = () => {
+const AddProduct = ({ setAddproduct }: prop) => {
+    const Dispatch = useDispatch<AppDispatch>()
+    const[loading,setLoading]=useState(false);
     const [category, setCategory] = useState<string>('');
     const [categoryList, setCategoryList] = useState<categoryType[]>([])
     const [size, setSize] = useState<string>();
@@ -27,7 +39,6 @@ const AddProduct: FC = () => {
     const [price, SetPrice] = useState<string>("10");
     const [mrp, setMrp] = useState<string>("10");
     const [stock_quantity, setstock_quantity] = useState<string>("100");
-    console.log(category, categoryList);
 
     const [check, setcheck] = useState<checkboxData[]>([
         { label: '7', checked: false },
@@ -98,10 +109,9 @@ const AddProduct: FC = () => {
     }
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        if (!category.length) return;
-
+        if (!category.length) return toast.error('select category');
+        setLoading(true)
         const selectedSizes = check.filter((size) => size.checked == true).map(item => item.label)
-        const data = { productname, brand, description }
         const form = new FormData()
         form.append('name', productname)
         form.append('file', image[0] as Blob)
@@ -115,23 +125,28 @@ const AddProduct: FC = () => {
             form.append('stock_quantity', stock_quantity),
             form.append('category_id', category)
         form.append('sizes', JSON.stringify(selectedSizes))
-        console.log(form);
-        for (const [key, value] of form.entries()) {
-            console.log(key, value);
-        }
-        await axios.post('http://localhost:9000/product/addproduct',
-            form, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        })
-        // fecthData.post('/test', form)
+        console.log('here is there');
 
+        addProduct(form).then(({ data }) => {
+            console.log(data);
+            Dispatch(appendToAllProducts({ ...data, orderQuantity: 0, totalSale: 0 }))
+            setLoading(false)
+            toast.success('successfully product added')
+        }).catch((error) => {
+            console.log('not go');
+
+            ApiErrorResponse(error)
+        })
     }
+    if(loading) return(<Loading/>)
     return (
 
         <form onSubmit={handleSubmit} className="w-full bg-sky-50 overflow-y-scroll">
             <h1 className="p-4 text-xl font-bold" >Add Product</h1>
+            <div className="flex justify-end py-4">
+                <button onClick={() => setAddproduct(false)} className="max-w-fit px-2 py-3 bg-black text-white  m-2  rounded-lg flex gap-1 items-center border">View Product</button>
+            </div>
+
             <div className=" w-auto flex gap-2 justify-between  mx-6 ">
                 <div className="w-full p-2 bg-white rounded">
                     <div className='py-2'>
@@ -275,7 +290,7 @@ const AddProduct: FC = () => {
                         </div>
 
                     </div>
-                    <button type='submit' className="p-3 px-6 bg-yellow-300 m-3 rounded ">Sumbit</button>
+                    <button disabled={loading?true:false} type='submit' className="p-3 px-6 bg-yellow-300 m-3 rounded disabled:bg-yellow-200">Sumbit</button>
                 </div>
             </div>
         </form>

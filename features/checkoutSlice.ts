@@ -8,7 +8,7 @@ const initialState={
 }
 
 const checkoutSlice=createSlice({
-    name:'cart',
+    name:'checkout',
     initialState,
     reducers:{
         setTotalAmount:(state,action:PayloadAction<number>)=>{

@@ -8,7 +8,7 @@ const Page = () => {
 console.log(addProduct);
 
   if (addProduct)
-    return (<AddProduct />)
+    return (<AddProduct setAddproduct={setAddproduct}/>)
 
   return (
     <ProductRecords setAddproduct={setAddproduct} />
