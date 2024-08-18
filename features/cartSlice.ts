@@ -29,11 +29,14 @@ const cartSlice=createSlice({
             })
             console.log(action.payload,state);
             
-        }
+        },
+        removeitem:(state,action:PayloadAction<string>)=>{
+           return state.filter((item:cartType)=>item.cartItem_id!=action.payload);
+        },
 
 
     }
 })
 
-export const {setCartItems,setQuantity}=cartSlice.actions
+export const {setCartItems,setQuantity,removeitem}=cartSlice.actions
 export default cartSlice.reducer;

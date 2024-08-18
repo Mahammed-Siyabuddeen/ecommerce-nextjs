@@ -16,7 +16,7 @@ export const fecthData = axios.create({
 
 fecthData.interceptors.request.use((req: any) => {
   try {
-    if (window) {
+    if (typeof window!='undefined') {
 
       const profile = localStorage.getItem('profile');
       if (profile) {

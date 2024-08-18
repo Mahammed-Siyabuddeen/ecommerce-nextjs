@@ -6,7 +6,7 @@ import { PaypalIcon } from './Icons/PaypalIcon'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/features/redux/store'
 import { cartType } from './Types/cartType'
-import { setTotalAmount } from '@/features/checkoutSlice'
+import { setCheckoutProduct, setCurrentComponent, setTotalAmount } from '@/features/checkoutSlice'
 import { useRouter, usePathname } from 'next/navigation'
 
 function CartTotal() {
@@ -18,10 +18,25 @@ function CartTotal() {
 
     const cart = useSelector((state: RootState) => state.cart)
     const checkout = useSelector((state: RootState) => state.checkout)
-    let s = cart.reduce((total: number, item: cartType) => total + item.total, 0)
+    
+    function getTotalamount(): number {
+        if (pathname === '/cart') {
+            return cart.reduce((total: number, item: cartType) => total + item.total, 0)
+        }
+        return checkout.checkout_products.reduce((total: number, item: cartType) => total + item.total, 0)
+    }
+
     useEffect(() => {
-        dispatch(setTotalAmount(s))
-    }, [s, dispatch])
+        dispatch(setTotalAmount(getTotalamount()))
+    }, [getTotalamount, dispatch])
+
+    const addtoCheckout = () => {
+        dispatch(setCheckoutProduct(cart))
+        router.push('/checkout')
+    }
+    const handleBilling = () => {
+        dispatch(setCurrentComponent('billing'))
+    }
     return (
         <div className="p-3 flex flex-col gap-4 border">
             <div>
@@ -41,18 +56,22 @@ function CartTotal() {
             </div>
             <div>
                 {
-                    pathname === '/checkout' ?
+                    checkout.cuurentComponent === 'address' ?
                         (
                             <button type='submit' className="bg-yellow-400 p-3 w-full text-white">
-                                Billing
+                                Summary
                             </button>
                         )
 
-                        : (
-                            <button onClick={() => router.push('/checkout')} className="bg-yellow-400 p-3 w-full text-white">
+                        : checkout.cuurentComponent == 'summary' ?
+                            (
+                                <button onClick={handleBilling} className="bg-yellow-400 p-3 w-full text-white">
+                                    Billing
+                                </button>
+                            )
+                            : <button onClick={addtoCheckout} className="bg-yellow-400 p-3 w-full text-white">
                                 Check out
                             </button>
-                        )
                 }
             </div>
             <div className="flex justify-evenly">

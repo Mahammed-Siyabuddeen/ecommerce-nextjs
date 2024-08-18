@@ -18,7 +18,7 @@ const Header = () => {
             </div>
             <div className="basis-1/4 flex w-full items-center justify-center">
             <AccountLabel/>
-                <div className="basis-1/4  text-2xl "><FavIcon/></div>
+                <Link href={'/wishlist'} className="basis-1/4  text-2xl "><FavIcon/></Link>
                 <Link href={'/cart'} className="basis-1/4  text-2xl"><CartIcon/></Link>
             </div>
 
