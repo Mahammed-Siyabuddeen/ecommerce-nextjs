@@ -8,7 +8,7 @@ interface prop {
 }
 const OrderItem: FC<prop> = ({ order, setIsopen, setCurrentOrder }) => {
   return (
-    <tr className="hover:bg-slate-400 text-xs w-full relative">
+    <tr className="hover:bg-slate-400  w-full relative">
       <td className=" truncate w-6 px-6 py-3" >{order._id}</td>
       <td className=" truncate w-6 px-6 py-3" >{order.product_name}</td>
       <td className=" truncate w-6 px-6 py-3" >{order.customer_name}</td>

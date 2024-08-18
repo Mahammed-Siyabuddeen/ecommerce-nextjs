@@ -1,18 +1,35 @@
+'use client'
 import Image from 'next/image'
 import React, { FC } from 'react'
 import { SemiStarIcon } from './Icons/StarIcon'
 import { productType } from './Types/productType'
 import Link from 'next/link'
+import { FavIcon } from './Icons/FavIcon'
+import { removeWishListItem } from '@/Services/removeWishListItem'
+import { addItemToWishList } from '@/Services/addItemToWishList'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/features/redux/store'
+import { toast } from 'sonner'
+import ApiErrorResponse from '@/Services/ApiErrorResponse'
 
 
 const Product = ({ color, productinfo }: { color: string, productinfo: productType }) => {
+  const user=useSelector((state:RootState)=>state.user)
   if (!productinfo) return <>proudct not found</>
+
+  const handleAddtoWishList=()=>{
+    if(!user._id) return toast.error('please login')
+    addItemToWishList({user_id:user._id,product_id:productinfo._id}).then(()=>{
+      toast.success('successfully added ')
+  }).catch(error=>ApiErrorResponse(error))
+  }
   return (
-    <Link href={`/productdetails/${productinfo._id}`} className="p-3 rounded-sm">
+    <div  className="p-3 rounded-sm">
       <div className={`h-64  relative ${color == "white" ? 'bg-white' : 'bg-slate-200'}`}>
         <Image fill className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
+        <FavIcon onClick={handleAddtoWishList} className='absolute cursor-pointer z-50 text-2xl right-2 top-2'/>
       </div>
-      <div className='flex flex-col gap-1'>
+      <Link href={`/productdetails/${productinfo._id}`} className='flex flex-col gap-1'>
         <h3 className='font-semibold pt-2'>{productinfo.name}</h3>
         <p className='text-sm text-slate-800 font-semibold'>{productinfo.brand}</p>
         <div className="flex  items-center">
@@ -23,8 +40,8 @@ const Product = ({ color, productinfo }: { color: string, productinfo: productTy
           <p className='line-through text-slate-950 opacity-80'>&#8377;{productinfo.mrp}</p>
           <p>&#8377; {productinfo.price}</p>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }
 

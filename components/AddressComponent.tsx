@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/features/redux/store";
 import { setAddress } from "@/features/addressSlice";
 import { useRouter } from "next/navigation";
+import { setCurrentComponent } from "@/features/checkoutSlice";
 
 const AddressComponent: FC = () => {
     const [name, setName] = useState<string>("");
@@ -21,7 +22,7 @@ const AddressComponent: FC = () => {
     const handlecheckout = (e: FormEvent) => {
         e.preventDefault();
         dispatch(setAddress({ name, street, city, state, zipcode, country, phone }));
-        router.push('/billing');
+        dispatch(setCurrentComponent('summary'))
     }
     return (
         <form onSubmit={(e: FormEvent) => handlecheckout(e)} className="container mx-auto">

@@ -69,9 +69,8 @@ const PopupOrderDetails: FC<prop> = ({ isOpen, setIsOpen,currentOrder }) => {
                             <Popover  className="">
                                 <PopoverButton  className=" m-3 p-2 px-4 text-center rounded bg-yellow-400 flex gap-2 items-center">{currentOrder.status} <Arrowdown /> </PopoverButton>
                                 <PopoverPanel anchor="bottom start" className="flex flex-col gap-2 mt-3 py-4 pr-8 px-2  z-50 bg-white rounded shadow-lg shadow-orange-100 ">
-                                    <p onClick={()=>handleStatusChange('confirmed')} className=' cursor-pointer'>confirmed</p>
                                     <p onClick={()=>handleStatusChange('shipped')}  className=' cursor-pointer'>shipped</p>
-                                    <p onClick={()=>handleStatusChange('Delivered')} className=' cursor-pointer'>Deliver</p>
+                                    <p onClick={()=>handleStatusChange('delivered')} className=' cursor-pointer'>Delivered</p>
                                     <p onClick={()=>handleStatusChange('canceled')}  className='text-red-600 cursor-pointer'>canceled</p>
                                 </PopoverPanel>
                             </Popover>
