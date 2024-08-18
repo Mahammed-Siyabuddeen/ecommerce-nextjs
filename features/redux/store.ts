@@ -8,6 +8,7 @@ import addressSlice from "../addressSlice";
 import orderDetailsSlice from "../orderDetailsSlice";
 import AllOrders from "@/components/AllOrders";
 import adminOrderSlice from "../adminOrderSlice";
+import allProductsSlice from "../allProductsSlice";
 
 export const store = configureStore({
     reducer: {
@@ -18,7 +19,8 @@ export const store = configureStore({
         checkout:checkoutSlice,
         address:addressSlice,
         orderDetails:orderDetailsSlice,
-        AllOrders:adminOrderSlice
+        allOrders:adminOrderSlice,
+        allProducts:allProductsSlice,
     }
 })
 
