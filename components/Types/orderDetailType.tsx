@@ -11,5 +11,6 @@ export interface orderDetailsType{
     productImage:string[],
     orderItemId:string,
     address:addressType,
+    create_at:string
     
 }

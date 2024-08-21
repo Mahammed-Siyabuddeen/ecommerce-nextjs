@@ -5,7 +5,7 @@ import { initialize } from "next/dist/server/lib/render-server";
 
 const initialState: allOrderType[] = []
 interface prop { }
-const customerStatusSort = ['ordered', 'shipped', 'delivered', 'canceled'];
+const customerStatusSort = ['ordered', 'shipped','out of delivery', 'delivered', 'canceled'];
 const adminOrderSlice = createSlice({
     name: 'AllOrders',
     initialState,

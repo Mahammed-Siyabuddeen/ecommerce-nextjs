@@ -1,37 +1,20 @@
 'use client'
-import React from 'react'
+import ApiErrorResponse from '@/Services/ApiErrorResponse'
+import { getTotalSalesByMonth } from '@/Services/dashboard.services'
+import React, { useEffect, useState } from 'react'
 import { Area, AreaChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { salesByMonthType } from './Types/salesByMonthType'
 
-
-let data = [
-  {
-    month: 'jan',
-    sale: 13899,
-  },
-  {
-    month: 'feb',
-    sale: 10000,
-  },
-  {
-    month: 'march',
-    sale: 4560,
-  },
-  {
-    month: 'april',
-    sale: 9087,
-  },
-  {
-    month: 'may',
-    sale: 6009,
-  },
-  {
-    month: 'june',
-    sale: 23000,
-  },
-]
 const SimpleAreaChart = () => {
+  const[data,setData]=useState<salesByMonthType[]>([])
+  useEffect(()=>{
+    getTotalSalesByMonth().then(({data})=>{
+      console.log(data);
+      setData(data)
+    }).catch((error)=>ApiErrorResponse(error))
+  },[])
   return (
-    <ResponsiveContainer width={'100%'} height={'100%'}>
+    <ResponsiveContainer width={'100%'} height={'100%'} className={''}>
 
     <AreaChart
       
@@ -47,7 +30,7 @@ const SimpleAreaChart = () => {
       <CartesianGrid strokeDasharray="3 3" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="sale" stroke="#8884d8" fill="#8884d8" />
+      <Area type="monotone" dataKey="totalSales" stroke="#8884d8" fill="#8884d8" />
     </AreaChart>
     </ResponsiveContainer>
 
