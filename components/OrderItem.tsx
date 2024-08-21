@@ -8,7 +8,7 @@ interface prop {
 }
 const OrderItem: FC<prop> = ({ order, setIsopen, setCurrentOrder }) => {
   return (
-    <tr className="hover:bg-slate-400  w-full relative">
+    <tr className="hover:bg-orange-50  w-full relative border-b">
       <td className=" truncate w-6 px-6 py-3" >{order._id}</td>
       <td className=" truncate w-6 px-6 py-3" >{order.product_name}</td>
       <td className=" truncate w-6 px-6 py-3" >{order.customer_name}</td>
@@ -20,8 +20,8 @@ const OrderItem: FC<prop> = ({ order, setIsopen, setCurrentOrder }) => {
         setCurrentOrder(order)
         setIsopen(true)
       }}
-        className={`truncate w-6 px-6 py-3
-           ${order.status=='canceled'?'text-red-500':order.status=='Delivered'?'text-green-500':'text-yellow-400'} `} >{order.status}</td>
+        className={`truncate w-6 px-6 py-3 cursor-pointer
+           ${order.status=='canceled'?'text-red-500':order.status=='delivered'?'text-green-500':'text-yellow-400'} `} >{order.status}</td>
     </tr>
   )
 }
