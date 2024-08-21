@@ -31,8 +31,6 @@ const Page: FC = () => {
                 const promiseData = await Promise.all([getProductByCategories(), getOrderByCity()])
                 setProductByCategoryData(promiseData[0].data)
                 setOrderByCityData(promiseData[1].data)
-                console.log(promiseData);
-
             } catch (error) {
             }
         }

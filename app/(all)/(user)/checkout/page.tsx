@@ -23,8 +23,6 @@ const Page: FC = () => {
     const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string);
 
     useEffect(() => {
-        console.log('working');
-
         // if (!cart.length)
         //     router.push('/cart')
         setLoading(false)
