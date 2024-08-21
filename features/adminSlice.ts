@@ -34,5 +34,5 @@ const adminSlice = createSlice({
         }
     }
 })
-export const { setAdmin } = adminSlice.actions;
+export const { setAdmin,clearAdmin } = adminSlice.actions;
 export default adminSlice.reducer;

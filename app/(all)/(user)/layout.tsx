@@ -1,47 +1,33 @@
 'use client';
+import Loading from '@/components/Loading';
 import { clearUser, userType } from '@/features/authSlice';
-import { AppDispatch } from '@/features/redux/store';
-import jwt, { JwtPayload } from 'jsonwebtoken';
 import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 export default function UserLayout({ children }: { children: React.ReactNode }) {
-    const isLoggin = true;
-    const Dispatch = useDispatch<AppDispatch>()
     const [isvalidtoken, setValidToken] = useState<boolean | null>(null)
     const router = useRouter();
-
+    const Dispatch = useDispatch()
     useEffect(() => {
         function verifytoken() {
             try {
-                const userdata = localStorage.getItem('profile');
-                if (!userdata) return;
-                const user = JSON.parse(userdata) as userType;
-                if (!user) return;
-                const de=jwtDecode(user.token)
-                if(typeof de.exp==='undefined') return;
-                if(de.exp*1000<new Date().getTime())
-                     setValidToken(false)
+                const user = JSON.parse(localStorage.getItem('profile') as string) as userType;
+                if (!user) throw new Error("login");
+                const decoded = jwtDecode(user.token)
+                if ((decoded.exp as number) * 1000 < new Date().getTime()) {
+                    Dispatch(clearUser());
+                    throw new Error("login");
+                }
                 setValidToken(true);
             } catch (error) {
-                console.log(error);
-                setValidToken(false);
-
+                router.push('/login')
             }
-
         }
         verifytoken()
     }, [router])
 
-
-    useEffect(()=>{
-        if(isvalidtoken===false){
-            router.push('/login');
-        }
-    },[router,isvalidtoken])
-
-    if(isvalidtoken===null) return <>Loading</>
+    if (isvalidtoken === null) return <Loading />
     return (
         <div>
             {children}

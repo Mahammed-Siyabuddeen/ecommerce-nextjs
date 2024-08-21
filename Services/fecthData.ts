@@ -10,28 +10,28 @@ export const fecthFormData = axios.create({
 
 export const fecthData = axios.create({
   baseURL: 'http://localhost:9000',
-  withCredentials:true
+  withCredentials: true
 
 })
 
 fecthData.interceptors.request.use((req: any) => {
   try {
-    if (typeof window!='undefined') {
-
+    if (typeof window != 'undefined') {
       const profile = localStorage.getItem('profile');
+      const adminProfile = localStorage.getItem('adminProfile');
       if (profile) {
-
         const parsedProfile = JSON.parse(profile);
         req.headers = new AxiosHeaders(req.headers)
         req.headers.set('Authorization', `Bearer ${parsedProfile.token}`)
       }
+      if (adminProfile) {
+        const parsedProfile = JSON.parse(adminProfile);
+        req.headers = new AxiosHeaders(req.headers)
+        req.headers.set('adminAuthorization', `Bearer ${parsedProfile.token}`)
+      }
     }
   } catch (error) {
     console.log("axios erro", error);
-
-    // return Promise.reject(error);
   }
   return req;
 })
-// fecthData.defaults.withCredentials=true;
-// axios.defaults.withCredentials = true;
