@@ -14,7 +14,7 @@ export function StarIcon(props: SVGProps<SVGSVGElement>) {
   }
 
 
-export function outlineStarIcon(props: SVGProps<SVGSVGElement>) {
+export function OutlineStarIcon(props: SVGProps<SVGSVGElement>) {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M7.625 6.4L12 .725L16.375 6.4l6.85 2.3l-4.325 6.125l.175 6.825L12 19.675L4.925 21.65L5.1 14.8L.8 8.7zM8.85 8.125L4 9.725L7.1 14.2L7 18.975l5-1.375l5 1.4l-.1-4.8L20 9.775l-4.85-1.65L12 4zM12 11.5"></path></svg>
     )
