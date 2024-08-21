@@ -22,7 +22,6 @@ fecthData.interceptors.request.use((req: any) => {
       if (profile) {
 
         const parsedProfile = JSON.parse(profile);
-        console.log(parsedProfile);
         req.headers = new AxiosHeaders(req.headers)
         req.headers.set('Authorization', `Bearer ${parsedProfile.token}`)
       }

@@ -6,7 +6,7 @@ interface prop {
 const ProductRecord: FC<prop> = ({ productDetails }) => {
     return (
         <>
-            <tr className="hover:bg-slate-400 text-xs">
+            <tr className="hover:bg-orange-50 border-b">
                 <td className="px-6 py-3" >{productDetails.name}</td>
                 <td className="px-6 py-3" >{productDetails._id}</td>
                 <td className="px-6 py-3" >{productDetails.price}</td>

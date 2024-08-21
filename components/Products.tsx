@@ -22,7 +22,7 @@ const Products= ({products}:{products:productType[]}) => {
             <div className="grid  gap-5 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
                 {
                     data.map((item:productType)=>(
-                        <Product key={item._id} color='white' productinfo={item} />
+                        <Product key={item._id} productinfo={item} />
                     ))
                 }
             </div>

@@ -10,4 +10,8 @@ export  interface productType{
     imagesUrl:string[],
     sizes:string[],
     brand:string,
+    ratings:{
+        count:number,
+        average:number,
+    }
 }

@@ -55,9 +55,9 @@ const ProductRecords = ({setAddproduct}:prop) => {
 
                     </div>
                 </div>
-                <div className=" overflow-x-scroll overflow-y-scroll h-full border-t">
-                    <table className="w-full  text-left text-sm">
-                        <thead className="text-gray-700 uppercase text-xs mb-3">
+                <div className=" overflow-x-scroll m-4 box_shadow  overflow-y-scroll h-full border-t">
+                    <table className="w-full  text-left ">
+                        <thead className="text-gray-700 border-b-2 uppercase   mb-3">
                             <th className="px-6 py-3">Product</th>
                             <th className="px-6 py-3">ProdcutId</th>
                             <th className="px-6 py-3">Price</th>
