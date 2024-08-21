@@ -6,6 +6,7 @@ import CategoryList from "../components/CategoryList";
 import Products from "../components/Products";
 import Services from "../components/Services";
 import PopularProduct from "@/components/PopularProducts";
+import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <div>
@@ -15,6 +16,7 @@ export default function Home() {
       <CategoryList/>
       <PopularProduct/>
       <Services/>
+      <Footer/>
     </div>
   );
 }

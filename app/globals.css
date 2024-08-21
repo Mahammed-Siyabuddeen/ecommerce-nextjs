@@ -9,7 +9,10 @@
         background-image: url('/images/bg_yellow.jpg');
         height: 450px;
     }
-
+    .box_shadow{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        
+    }
     .service_div h2 {
         @apply font-semibold uppercase text-xl;
     }
@@ -51,6 +54,6 @@
         }
     }
 }
-html::-webkit-scrollbar{
+div::-webkit-scrollbar{
     display: none;
 }
