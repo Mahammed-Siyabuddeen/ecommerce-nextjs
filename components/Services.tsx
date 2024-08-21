@@ -6,8 +6,8 @@ import { SupportIcon } from './Icons/SupportIcon'
 
 const Services: FC = () => {
     return (
-        <div className="container mx-auto flex justify-evenly py-3 ">
-            <div className="basis-1/4 service_div flex  gap-5 items-center ">
+        <div className="container mx-auto flex justify-evenly p-4 pb-8 ">
+            <div className="basis-1/4 service_div flex  gap-5 items-center justify-center ">
                 <div>
                     <DeliveryIcon className='text-2xl'/>
                 </div>
@@ -16,7 +16,7 @@ const Services: FC = () => {
                     <p>for all order above &#8377; 500</p>
                 </div>
             </div>
-            <div className="basis-1/4 service_div flex  gap-5 items-center">
+            <div className="basis-1/4 service_div flex  gap-5 items-center justify-center">
                 <div>
                     <ReturnIcon className='text-3xl'/>
                 </div>
@@ -25,7 +25,7 @@ const Services: FC = () => {
                     <p>goods have a problems</p>
                 </div>
             </div>
-            <div className="basis-1/4 service_div flex gap-5 items-center ">
+            <div className="basis-1/4 service_div flex gap-5 items-center justify-center ">
                 <div>
                     <SecurePaymentIcon className='text-3xl'/>
                 </div>
@@ -34,7 +34,7 @@ const Services: FC = () => {
                     <p>100% secure payment</p>
                 </div>
             </div>
-            <div className="basis-1/4 service_div flex  gap-5 items-center">
+            <div className="basis-1/4 service_div flex  gap-5 items-center justify-center">
                 <div>
                     <SupportIcon className='text-3xl'/>
                 </div>
