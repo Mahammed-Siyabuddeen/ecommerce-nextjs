@@ -1,21 +1,28 @@
 import { cartType } from "@/components/Types/cartType";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-
-const initialState:cartType[]=[]
+interface  iniitaltype{
+    cartitems:cartType[],
+    Count:number
+}
+const initialState:iniitaltype={
+    cartitems:[],
+    Count:0
+}
 const cartSlice=createSlice({
     name:'cart',
     initialState,
     reducers:{
         setCartItems:(state,action:PayloadAction<cartType[]>)=>{
-            return action.payload;
+            state.cartitems=action.payload
+            return state;
             
         },
         setQuantity:(state,action:PayloadAction<[number,string]>)=>{
             const [quantity,_id]=action.payload
             console.log(quantity,_id);
             
-            state.map((item:cartType)=>{
+            state.cartitems.map((item:cartType)=>{
                 if(item.cartItem_id===_id){
                     console.log(item._id,_id);
                     
@@ -31,12 +38,18 @@ const cartSlice=createSlice({
             
         },
         removeitem:(state,action:PayloadAction<string>)=>{
-           return state.filter((item:cartType)=>item.cartItem_id!=action.payload);
+            state.cartitems.filter((item:cartType)=>item.cartItem_id!=action.payload);
+            return state;
         },
-
+        setCartCount:(state,action:PayloadAction<number>)=>{
+            console.log(action.payload);
+            state.Count=action.payload;
+            
+            return state;
+        }
 
     }
 })
 
-export const {setCartItems,setQuantity,removeitem}=cartSlice.actions
+export const {setCartItems,setQuantity,removeitem,setCartCount}=cartSlice.actions
 export default cartSlice.reducer;

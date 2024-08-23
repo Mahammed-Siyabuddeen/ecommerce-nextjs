@@ -16,12 +16,12 @@ function CartTotal() {
     const pathname = usePathname()
     console.log(pathname);
 
-    const cart = useSelector((state: RootState) => state.cart)
+    const {cartitems} = useSelector((state: RootState) => state.cart)
     const checkout = useSelector((state: RootState) => state.checkout)
     
     function getTotalamount(): number {
         if (pathname === '/cart') {
-            return cart.reduce((total: number, item: cartType) => total + item.total, 0)
+            return cartitems.reduce((total: number, item: cartType) => total + item.total, 0)
         }
         return checkout.checkout_products.reduce((total: number, item: cartType) => total + item.total, 0)
     }
@@ -31,7 +31,7 @@ function CartTotal() {
     }, [getTotalamount, dispatch])
 
     const addtoCheckout = () => {
-        dispatch(setCheckoutProduct(cart))
+        dispatch(setCheckoutProduct(cartitems))
         router.push('/checkout')
     }
     const handleBilling = () => {
@@ -44,15 +44,15 @@ function CartTotal() {
             </div>
             <div className="flex justify-between">
                 <h2>Sub-Total</h2>
-                <p className="text-slate-400">{checkout.sub_total}</p>
+                <p className="text-slate-400">&#8377;{checkout.sub_total}</p>
             </div>
             <div className="flex justify-between">
                 <h2>delivery</h2>
-                <p className="text-slate-400">{checkout.delivery_amount}</p>
+                <p className="text-slate-400">&#8377;{checkout.delivery_amount}</p>
             </div>
             <div className="flex justify-between font-bold">
                 <h2 >Total</h2>
-                <p className="text-slate-400">{checkout.total_amount}</p>
+                <p className="text-slate-400">&#8377;{checkout.total_amount}</p>
             </div>
             <div>
                 {

@@ -13,24 +13,30 @@ import { useRouter } from 'next/navigation'
 import SimilarProducts from './SimilarProducts'
 import ProductReviews from './ProductReviews'
 import { toast } from 'sonner'
+import { AxiosResponse } from 'axios'
+import { setCartCount } from '@/features/cartSlice'
 
 const ProductDetails = ({ productdetials }: { productdetials: productType }) => {
   const user = useSelector((state: RootState) => state.user)
+  const {Count} = useSelector((state: RootState) => state. cart)
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
   const [currentsize, setCurrentSize] = useState<string | undefined>(productdetials?.sizes[0] || undefined)
+
   const handleAddToCart = async () => {
     if (!user) return alert('please login');
-    if(productdetials.stock_quantity<1) return toast("Product is currently not available.")
+    if (productdetials.stock_quantity < 1) return toast("Product is currently not available.")
+    toast.success("successfully added");
     try {
-      await addtocart({ product_id: productdetials._id, user_id: user._id, size: currentsize })
+      const { data }: AxiosResponse = await addtocart({ product_id: productdetials._id, user_id: user._id, size: currentsize })
+      dispatch(setCartCount(Count+1))
     } catch (error) {
       ApiErrorResponse(error)
     }
   }
   const handleBuyNow = async () => {
     if (!user) return toast.error('please login');
-    if(productdetials.stock_quantity<1) return toast("Product is currently not available.")
+    if (productdetials.stock_quantity < 1) return toast("Product is currently not available.")
     addtocart({ product_id: productdetials._id, user_id: user._id, size: currentsize }).then(({ data }) => {
       dispatch(setCheckoutProduct([
         {
@@ -80,7 +86,7 @@ const ProductDetails = ({ productdetials }: { productdetials: productType }) => 
         </div>
       </div>
       <SimilarProducts category_id={productdetials.category_id} product_id={productdetials._id} />
-      <ProductReviews product_id={productdetials._id}/>
+      <ProductReviews product_id={productdetials._id} />
     </div>
   )
 }
