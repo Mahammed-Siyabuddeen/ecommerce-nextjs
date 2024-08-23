@@ -30,7 +30,7 @@ const Product = ({productinfo }: { productinfo: productType }) => {
   return (
     <div  className="p-3 rounded-sm">
       <div className={`h-64  relative ${pathname == "/search" ? 'bg-white' : 'bg-slate-200'}`}>
-        <Image fill className=' ' src="/images/favpng_apple-watch-series-2-apple-watch-series-3-apple-watch-series-1.png" alt="" />
+        <Image fill className=' ' src={productinfo.imagesUrl[0]} alt="" />
         <FavIcon onClick={handleAddtoWishList} className='absolute cursor-pointer z-50 text-2xl right-2 top-2'/>
       </div>
       <Link href={`/productdetails/${productinfo._id}`} className='flex flex-col gap-1'>
