@@ -9,9 +9,9 @@ const Slider= ({banner}:{banner:bannerType}) => {
             <div className="basis-2/4 flex flex-col justify-center gap-4 pl-16">
                 <h1 className='text-5xl font-bold'>{banner.heading}</h1>
                 <h2 className='text-4xl font-extrabold'>{banner.sub_heading}</h2>
-           <ShopButton/>
+           <ShopButton id={banner.product_id} />
             </div>
-            <div className="basis-2/4 relative">
+            <div className="basis-2/4 h-96 my-14 relative">
                 <img className='max-h-full max-w-full' alt='' src={banner.image_url}  />
             </div>
         </div>

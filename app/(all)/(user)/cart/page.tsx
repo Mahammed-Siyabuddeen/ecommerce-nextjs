@@ -11,7 +11,7 @@ import { cartType } from '@/components/Types/cartType'
 import { setCartItems } from '@/features/cartSlice'
 const Page: FC = () => {
   const user = useSelector((state: RootState) => state.user);
-  const cart = useSelector((state: RootState) => state.cart);
+  const {cartitems} = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -21,6 +21,11 @@ const Page: FC = () => {
       dispatch(setCartItems(data));
     }).catch((error) => ApiErrorResponse(error))
   }, [dispatch, user])
+  if (!cartitems.length) return (
+    <div className="flex items-center justify-center h-96">
+      <p className="text-center text-2xl font-bold text-slate-500">Empty Cart</p>
+    </div>
+  )
   return (
     <div className="">
       <div className="container mx-auto">
@@ -36,14 +41,12 @@ const Page: FC = () => {
               <p className='w-1/6 items-center text-center'>close</p>
             </div>
             {
-              cart.map((items: cartType) => (
+              cartitems.map((items: cartType) => (
 
                 <CartItem key={items._id} items={items} />
               ))
             }
-
           </div>
-
           <div className="w-1/5  ">
             <CartTotal />
           </div>

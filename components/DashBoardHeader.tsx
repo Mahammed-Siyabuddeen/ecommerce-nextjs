@@ -30,22 +30,22 @@ const DashBoardHeader = () => {
     return (
         <>
             <div className="p-8 items-center w-40 justify-evenly box_shadow  flex flex-col bg-white rounded ">
-                <div className="text-4xl "><SalesIcon className='text-blue-500' /></div>
+                <div className="text-4xl "><SalesIcon className='text-yellow-400'/></div>
                 <h1 className="font-bold text-3xl">{dashboard.totalSales}</h1>
                 <p className="text-sm text-gray-500">Total Sales</p>
             </div>
             <div className="p-8 items-center w-40 justify-evenly box_shadow   flex flex-col bg-white rounded  ">
-                <div className="text-4xl "><ProductIcon className='text-blue-500' /></div>
+                <div className="text-4xl "><ProductIcon className='text-yellow-400' /></div>
                 <h1 className="font-bold text-3xl">{dashboard.totalProducts}</h1>
                 <p className="text-sm text-gray-500">Total Products</p>
             </div>
             <div className="p-8 items-center w-40 justify-evenly box_shadow   flex flex-col bg-white rounded ">
-                <div className="text-4xl "><CustomerIcon className='text-blue-500' /></div>
+                <div className="text-4xl "><CustomerIcon className='text-yellow-400' /></div>
                 <h1 className="font-bold text-3xl">{dashboard.totalCustomers}</h1>
                 <p className="text-sm text-gray-500">Customers</p>
             </div>
             <div className="p-8 items-center w-40 justify-evenly box_shadow   flex flex-col bg-white rounded  ">
-                <div className="text-4xl "><OrderIcon className='text-blue-500' /></div>
+                <div className="text-4xl "><OrderIcon className='text-yellow-400' /></div>
                 <h1 className="font-bold text-3xl">{dashboard.totalOrders}</h1>
                 <p className="text-sm text-gray-500"> Orders</p>
             </div>

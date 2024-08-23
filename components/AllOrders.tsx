@@ -38,7 +38,6 @@ const AllOrders = () => {
             <div className="px-6">
                 <div className="flex justify-between py-6 items-center">
                     <h1 className="font-bold text-xl">Orders</h1>
-                    <button className="max-w-fit px-2 p-1 font-medium border rounded-md">Export</button>
                 </div>
                 <div className="flex items-center ">
                     <button onClick={changeOrderByStatus} className="text-lg  max-w-fit px-2  py-2  m-2  rounded-lg flex gap-1 items-center border bg-yellow-400  hover:bg-yellow-500">status<Arrowdown /></button>

@@ -16,19 +16,11 @@ import { loadStripe } from '@stripe/stripe-js';
 const Page: FC = () => {
 
     const [billing, setBilling] = useState(false);
-    const [loading, setLoading] = useState(true)
-    const cart = useSelector((state: RootState) => state.cart)
+    const [, setLoading] = useState(true)
     const checkout = useSelector((state: RootState) => state.checkout)
     const router = useRouter()
     const stripe = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string);
 
-    useEffect(() => {
-        // if (!cart.length)
-        //     router.push('/cart')
-        setLoading(false)
-    }, [cart])
-
-    if (loading) return (<Loading />)
     return (
         <>
             {checkout.cuurentComponent == 'billing' ? (

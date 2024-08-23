@@ -18,12 +18,12 @@ const AccountLabel: FC = () => {
 
   if(user===null) return(<></>)
   if (!user.first_name.length) return (
-    <Link href={'/login'} className="basis-2/4 justify-center gap-1  flex items-center"><span className='text-xl'><AccountIcon /></span>Account</Link>
+    <Link href={'/login'} className="basis-2/4 justify-center gap-1  flex items-center" title='login'><span className='text-xl'><AccountIcon /></span>Account</Link>
   )
   return (
     <>
      <PopupAccount />
-     <Link href={'/orders'} className="basis-2/4 justify-center gap-1  flex items-center"><span className='text-xl'><OrderIcon/></span>Orders</Link>
+     <Link href={'/orders'} className="basis-2/4 justify-center gap-1  flex items-center" title='orders'><span className='text-xl'><OrderIcon/></span></Link>
 
     </>
   )

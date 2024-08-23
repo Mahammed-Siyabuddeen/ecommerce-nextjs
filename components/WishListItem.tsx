@@ -29,7 +29,7 @@ const WishListItem:FC<prop> = ({item,setWishListItems}) => {
                         {item.product.name}
                     </h1>
                 </div>
-                <h1 className="font-bold text-xl">{item.product.price}</h1>
+                <h1 className="font-bold text-xl">&#8377; {item.product.price}</h1>
             </div>
             <div className="basis-1/7 ">
                 <div className="text-2xl px-4 cursor-pointer text-red-500">

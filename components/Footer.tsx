@@ -4,11 +4,11 @@ import { LinkedInIcon } from './Icons/LinkedInIcon'
 
 const Footer = () => {
     return (
-        <div className="p-10 bg-yellow-400 text-gray-950">
+        <div className="p-10 bg-yellow-400 text-slate-950">
             <div className="w-full flex pb-2">
                 <div className="flex-1">
                     <Link href={'/'} className="basis-1/4">
-                        <h1 className="text-3xl font-bold">PAI<span className='text-yellow-800'>RCA</span>RE</h1>
+                        <h1 className="text-3xl font-bold">PAI<span className='text-slate-200'>RCA</span>RE</h1>
                     </Link>
                 </div>
                 <div className="flex-1">

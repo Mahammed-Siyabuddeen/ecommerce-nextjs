@@ -16,7 +16,6 @@ const Billing = () => {
     const address = useSelector((state: RootState) => state.address)
     const checkout = useSelector((state: RootState) => state.checkout)
     const user = useSelector((state: RootState) => state.user)
-    const cart = useSelector((state: RootState) => state.cart)
 
     useEffect(() => {
         if (!checkout.checkout_products.length || !user._id.length) return;

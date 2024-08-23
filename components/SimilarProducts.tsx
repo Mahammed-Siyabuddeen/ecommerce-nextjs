@@ -10,19 +10,6 @@ interface prop {
 }
 const SimilarProducts:FC<prop> = ({category_id,product_id}) => {
   const[products,setProducts]=useState<productType[]>([])
-  let demodata: productType = {
-    _id: 'uid8909',
-    name: 'demo product',
-    brand: 'nike',
-    category_id: 'uoij',
-    created_at: new Date(),
-    description: 'hwoo',
-    imagesUrl: ['fj', 'fdf'],
-    mrp: 980,
-    price: 29,
-    sizes: ['y', 'm'],
-    stock_quantity: 890
-  }
   useEffect(()=>{
     getRelatedProducts({category_id,product_id})
     .then(({data})=>setProducts(data))

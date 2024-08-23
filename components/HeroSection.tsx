@@ -8,18 +8,16 @@ const HeroSection = () => {
     const [banners, setBanners] = useState<bannerType[]>([]);
     useEffect(() => {
         getBanners().then(({ data }) => setBanners(data))
-    })
+    },[])
     const handleNext = (value: number) => {
         setCount ((prevcount)=>prevcount+value>4?0:prevcount+1)
     }
     const handlePrev = (value: number) => {
         setCount ((prevcount)=>prevcount+value<0?4:prevcount-1)
     }
-    console.log(count);
-    
     return (
         <div id="default-carousel" className="relative w-full" data-carousel="slide">
-            <div className="relative h-72 overflow-hidden rounded-lg md:h-96">
+            <div className="relative  overflow-hidden rounded-lg ">
                 {
                     banners.map((banner: bannerType, index) => (
                         <div className={`duration-700 h-full ease-in-out ${index == count ? 'block' : 'hidden'}`} data-carousel-item>

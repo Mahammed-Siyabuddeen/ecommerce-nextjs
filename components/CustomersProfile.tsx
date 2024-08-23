@@ -8,7 +8,7 @@ const CustomersProfile = ({ customers }: { customers: userType[] }) => {
             <h1 className="text-xl font-bold my-4">Customer Information</h1>
             <div className=" overflow-x-scroll overflow-y-scroll h-full border-t">
                 <table className="w-full  text-left ">
-                    <thead className="text-gray-700 uppercase text-xs mb-3">
+                    <thead className="text-slate-950 uppercase text-xs mb-3">
                         <th className="px-6 py-3">user</th>
                         <th className="px-6 py-3">Phone</th>
                         <th className="px-6 py-3">Email</th>
@@ -17,7 +17,7 @@ const CustomersProfile = ({ customers }: { customers: userType[] }) => {
                     <tbody>
                         {
                             customers.map((customer: userType) => (
-                                <tr key={customer._id} className="hover:bg-slate-400 ">
+                                <tr key={customer._id} className="hover:bg-slate-200 ">
                                     <td className="px-6 py-3 flex gap-4 items-center " >
                                         <div className='relative w-16 h-16 rounded-full overflow-hidden'>
                                             <Image src='/images/download (2).png' alt='' fill />
