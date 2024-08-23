@@ -3,16 +3,16 @@ import { ShopIcon } from './Icons/ShopIcon'
 import Image from 'next/image'
 import { ShopButton } from './ShopButton'
 
-const Slider: FC = () => {
+const Slider= ({banner}:{banner:bannerType}) => {
     return (
-        <div className='slider_bg rounded-xl w-full container mx-auto my-3 bg-red-300 flex '>
-            <div className="basis-2/4 flex flex-col justify-center gap-4 px-8">
-                <h1 className='text-7xl font-bold'>New Year Sale off 2024</h1>
-                <h2 className='text-5xl font-extrabold'>20% OFF</h2>
+        <div className={`slider_bg h-full rounded-xl w-full container mx-auto my-3 flex `}>
+            <div className="basis-2/4 flex flex-col justify-center gap-4 pl-16">
+                <h1 className='text-5xl font-bold'>{banner.heading}</h1>
+                <h2 className='text-4xl font-extrabold'>{banner.sub_heading}</h2>
            <ShopButton/>
             </div>
             <div className="basis-2/4 relative">
-                <img className='max-h-full max-w-full' alt='' src={'/images/Lovepik_com-401775421-rhino-modeling-smart-watch.png'}  />
+                <img className='max-h-full max-w-full' alt='' src={banner.image_url}  />
             </div>
         </div>
     )

@@ -35,3 +35,19 @@ fecthData.interceptors.request.use((req: any) => {
   }
   return req;
 })
+
+fecthFormData.interceptors.request.use((req: any) => {
+  try {
+    if (typeof window != 'undefined') {
+      const adminProfile = localStorage.getItem('adminProfile');
+      if (adminProfile) {
+        const parsedProfile = JSON.parse(adminProfile);
+        req.headers = new AxiosHeaders(req.headers)
+        req.headers.set('adminAuthorization', `Bearer ${parsedProfile.token}`)
+      }
+    }
+  } catch (error) {
+    console.log("axios erro", error);
+  }
+  return req;
+})
