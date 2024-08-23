@@ -8,5 +8,6 @@ export interface cartType{
     brand:string,
     imagesUrl:string[],
     total:number,
-    cartItem_id:string
+    cartItem_id:string,
+    stock_quantity:number,
 }

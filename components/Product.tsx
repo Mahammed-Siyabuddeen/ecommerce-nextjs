@@ -38,7 +38,7 @@ const Product = ({productinfo }: { productinfo: productType }) => {
         <p className='text-sm text-slate-800 font-semibold'>{productinfo.brand}</p>
         <div className="flex  items-center gap-2">
           <div className={`flex gap-1 items-center pr-3 border-r-2 ${productinfo.ratings.average===0?'hidden':'block'}`}><span className={`text-yellow-600 text-xl `}><SemiStarIcon /></span> {productinfo.ratings?.average}</div>
-          <div className='' >4500 sold</div>
+          {/* <div className='' >4500 sold</div> */}
         </div>
         <div className="flex gap-3">
           <p className='line-through text-slate-950 opacity-80'>&#8377;{productinfo.mrp}</p>

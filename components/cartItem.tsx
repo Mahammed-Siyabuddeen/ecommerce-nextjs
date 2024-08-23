@@ -18,6 +18,7 @@ const CartItem = ({ items }: { items: cartType }) => {
 
     const handlequantitychange = (value: number) => {
         if (pathname !== '/cart') router.push('/cart')
+        if(items.stock_quantity<items.quantity+value) return toast.error("That much stock is not available.")
         dispatch(setQuantity([value, items.cartItem_id]))
         changeCartItemsQuantity({ quantity: value, cartItem_id: items.cartItem_id })
         .then(({ data }) => {

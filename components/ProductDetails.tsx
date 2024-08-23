@@ -12,6 +12,7 @@ import { setCheckoutProduct, setCurrentComponent } from '@/features/checkoutSlic
 import { useRouter } from 'next/navigation'
 import SimilarProducts from './SimilarProducts'
 import ProductReviews from './ProductReviews'
+import { toast } from 'sonner'
 
 const ProductDetails = ({ productdetials }: { productdetials: productType }) => {
   const user = useSelector((state: RootState) => state.user)
@@ -20,6 +21,7 @@ const ProductDetails = ({ productdetials }: { productdetials: productType }) => 
   const [currentsize, setCurrentSize] = useState<string | undefined>(productdetials?.sizes[0] || undefined)
   const handleAddToCart = async () => {
     if (!user) return alert('please login');
+    if(productdetials.stock_quantity<1) return toast("Product is currently not available.")
     try {
       await addtocart({ product_id: productdetials._id, user_id: user._id, size: currentsize })
     } catch (error) {
@@ -27,7 +29,8 @@ const ProductDetails = ({ productdetials }: { productdetials: productType }) => 
     }
   }
   const handleBuyNow = async () => {
-    if (!user) return alert('please login');
+    if (!user) return toast.error('please login');
+    if(productdetials.stock_quantity<1) return toast("Product is currently not available.")
     addtocart({ product_id: productdetials._id, user_id: user._id, size: currentsize }).then(({ data }) => {
       dispatch(setCheckoutProduct([
         {
