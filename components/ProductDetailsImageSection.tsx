@@ -9,7 +9,7 @@ const ProductDetailsImageSection = ({ImagesUrls}:{ImagesUrls:string[]}) => {
   }
   return (
     <>
-      <div className='z-50 transition hover:scale-110 relative w-full p-10 h-3/4 overflow-hidden'>
+      <div className='transition hover:scale-110 relative w-full p-10 h-3/4 overflow-hidden'>
 
         <Image fill loading='lazy' src={currentImage} alt="ds" />
       </div>

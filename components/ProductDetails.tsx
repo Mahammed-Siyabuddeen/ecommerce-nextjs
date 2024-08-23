@@ -47,7 +47,7 @@ const ProductDetails = ({ productdetials }: { productdetials: productType }) => 
 
   return (
     <div className='container  p-3 mx-auto'>
-      <div className=" flex items-center bg-orange-50">
+      <div className=" flex items-center  ">
         <div className="basis-2/4  p-4 h-dvh relative">
           <ProductDetailsImageSection ImagesUrls={productdetials.imagesUrl} />
         </div>
