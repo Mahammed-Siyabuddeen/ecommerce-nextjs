@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
+import { userType } from './Types/userType'
 
-const CustomersProfile = () => {
+const CustomersProfile = ({ customers }: { customers: userType[] }) => {
     return (
         <div className="w-full p-4">
             <h1 className="text-xl font-bold my-4">Customer Information</h1>
@@ -14,22 +15,25 @@ const CustomersProfile = () => {
                         <th className="px-6 py-3 opacity-0">Action</th>
                     </thead>
                     <tbody>
-                        <tr className="hover:bg-slate-400 ">
-                            <td className="px-6 py-3 flex gap-4 items-center " >
-                                <div className='relative w-16 h-16 rounded-full overflow-hidden'>
-                                    <Image src='/images/download (2).png' alt='' fill/>
-                                </div>
-                                <p>mohd</p>
-                                <p>shihab</p>
-                            </td>
-                            <td className="px-6 py-3" >{'ProdcutId'}</td>
-                            <td className="px-6 py-3" >{'ProdcutId'}</td>
-                            <td className="px-6 py-3" >
-                                <button className=" p-2 px-4 font-medium bg-red-500 text-end text-white rounded">Block</button>
+                        {
+                            customers.map((customer: userType) => (
+                                <tr key={customer._id} className="hover:bg-slate-400 ">
+                                    <td className="px-6 py-3 flex gap-4 items-center " >
+                                        <div className='relative w-16 h-16 rounded-full overflow-hidden'>
+                                            <Image src='/images/download (2).png' alt='' fill />
+                                        </div>
+                                        <p>{customer.first_name}</p>
+                                        <p>{customer.last_name||''}</p>
+                                    </td>
+                                    <td className="px-6 py-3" >{customer.phone_number?.length?customer.phone_number[0]:''}</td>
+                                    <td className="px-6 py-3" >{customer.email}</td>
+                                    <td className="px-6 py-3" >
+                                        <button disabled className=" p-2 px-4 font-medium bg-red-300 text-end text-white rounded">Block</button>
+                                    </td>
+                                </tr>
+                            ))
+                        }
 
-                            </td>
-
-                        </tr>
                     </tbody>
                 </table>
             </div>
