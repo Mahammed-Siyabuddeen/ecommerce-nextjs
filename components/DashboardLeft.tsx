@@ -34,6 +34,10 @@ const DashboardLeft:FC = () => {
        <div className='text-blue-900'> <CatergoryIcon/></div>
         <Link href='/dashboard/categories'  className="font-medium">Categories</Link>
     </div>
+    <div className="flex gap-1 items-center cursor-pointer hover:bg-gray-200 p-3 m-2 rounded-sm">
+       <div className='text-blue-900'> <CatergoryIcon/></div>
+        <Link href='/dashboard/banners'  className="font-medium">Banners</Link>
+    </div>
 </div>
   )
 }
