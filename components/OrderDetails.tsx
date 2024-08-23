@@ -9,6 +9,8 @@ import OrderAddress from '@/components/OrderAddress'
 import { useRouter } from 'next/navigation'
 import React, { FormEvent, useEffect, useState } from 'react'
 import AddReview from './AddReview';
+import { cancelOrder } from '@/Services/cancleOrder.service';
+import OrderStatusBar from './OrderStatusBar';
 
 interface prop {
   order_id: string,
@@ -17,6 +19,7 @@ interface prop {
 const OrderDetails = ({ order_id, orderitem_id }: prop) => {
   const [data, setData] = useState<orderDetailsType | undefined>(undefined)
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState(data?.status)
   const [openReviewComponent, setOpenReviewComponent] = useState(false);
 
   const router = useRouter()
@@ -29,7 +32,6 @@ const OrderDetails = ({ order_id, orderitem_id }: prop) => {
         ApiErrorResponse(err);
         setLoading(false)
       })
-
   }, [])
 
   if (loading) return (<>Loading</>)
@@ -37,8 +39,16 @@ const OrderDetails = ({ order_id, orderitem_id }: prop) => {
     router.push('/orders')
     return null;
   }
-
-
+  const handleCancelOrder = () => {
+    cancelOrder({ order_id })
+      .then(() =>
+        setData((prevdata: orderDetailsType | undefined) => {
+          if (!prevdata) return prevdata;
+          return { ...prevdata, status: "canceled" }
+        })
+      )
+      .catch((error) => ApiErrorResponse(error))
+  }
   return (
     <div className="container mx-auto rounded flex flex-col gap-4">
       <OrderAddress data={data} address={data.address} />
@@ -50,34 +60,17 @@ const OrderDetails = ({ order_id, orderitem_id }: prop) => {
           <p>{data.productName}</p>
         </Link>
         <div className="basis-2/4 relative mx-4 ">
-          <div className="flex justify-between">
-            <div className="flex flex-col gap-3 items-start">
-              <div className="rounded-full w-3 h-3 bg-green-700 "></div>
-              <p className='text-green-700 text-sm'>Order Confirmed</p>
-            </div>
-            <div className="flex flex-col gap-3 items-center">
-              <div className="rounded-full w-3 h-3 bg-gray-700 "></div>
-              <p className='text-gray-700 text-sm'>shipped</p>
-            </div>
-            <div className="flex flex-col gap-3 items-center">
-              <div className="rounded-full w-3 h-3 bg-gray-700 "></div>
-              <p className='text-gray-700 text-sm'>out of delivery</p>
-            </div>
-            <div className="flex flex-col gap-3 items-end">
-              <div className="rounded-full w-3 h-3 bg-gray-700 "></div>
-              <p className='text-gray-700 text-sm'>delivered</p>
-            </div>
-          </div>
-          <div className="w-full h-1 absolute top-1  bg-gray-700"></div>
-          <div className={` h-1 absolute top-1  z-20 bg-green-700 ${data.status === 'delivered' ? 'w-full' : data.status === "out of delivery" ? 'w-3/4' : data.status === 'shipped' ? 'w-2/4' : 'w-1/4'}`}></div>
-
+          <OrderStatusBar status={data.status} />
         </div>
         {
-          openReviewComponent ?
-             <AddReview orderitem_id={orderitem_id}/>
-            : <div onClick={() => setOpenReviewComponent(true)} className="basis-1/4 cursor-pointer   flex items-center gap-2">
-              <StarIcon />
-              <p>Rate and Review Product</p>
+          openReviewComponent && data.status == 'delivered' ?
+            <AddReview setOpenReviewComponent={setOpenReviewComponent} orderitem_id={orderitem_id} />
+            : <div className='flex flex-col gap-2'>
+              <button disabled={(data.status == "canceled"||data.status == "delivered") ? true : false} onClick={handleCancelOrder} className="px-4 py-2 w-fit text-white rounded-lg bg-red-600 hover:bg-red-700 disabled:bg-red-400">cancel</button>
+              <div onClick={() => setOpenReviewComponent(true)} className="basis-1/4 cursor-pointer   flex items-center gap-2">
+                <StarIcon />
+                <p>Rate and Review Product</p>
+              </div>
             </div>
         }
 

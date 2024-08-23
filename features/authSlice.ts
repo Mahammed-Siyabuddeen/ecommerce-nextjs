@@ -1,14 +1,8 @@
+import { userType } from "@/components/Types/userType";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { jwtDecode } from "jwt-decode";
 
-export interface userType {
-    _id: string,
-    first_name: string,
-    email: string,
-    token: string,
-    last_name?: string,
-    phone_number?: string[],
-}
+
 const initialState = (): userType => {
     if (typeof window !== 'undefined') {
         const storedState = window.localStorage.getItem('profile')
