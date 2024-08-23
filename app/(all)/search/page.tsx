@@ -30,8 +30,17 @@ const page = () => {
         setLoading(true)
         getAllProductsapi({ name: searchByName, category: searchByCategory })
             .then(({ data }) => {
-                console.log(data);
                 setData(data)
+                const minAndMax: PriceRangeType = (data as productType[]).reduce<PriceRangeType>((acc, product) => {
+                    if (product.price < acc.min) {
+                        acc.min = product.price;
+                    }
+                    if (product.price > acc.max) {
+                        acc.max = product.price;
+                    }
+                    return acc;
+                }, { min: Infinity, max: -Infinity });
+                setPriceRange(minAndMax)
             })
             .catch((err) => console.log(err)
             )
@@ -39,19 +48,6 @@ const page = () => {
     }, [searchParams])
 
 
-    useEffect(() => {
-        if (!data.length) return;
-        const minAndMax: PriceRangeType = data.reduce<PriceRangeType>((acc, product) => {
-            if (product.price < acc.min) {
-                acc.min = product.price;
-            }
-            if (product.price > acc.max) {
-                acc.max = product.price;
-            }
-            return acc;
-        }, { min: Infinity, max: -Infinity });
-        setPriceRange(minAndMax)
-    }, [data])
     useEffect(() => {
         setLoading(true)
         getAllProductsapi({ name: searchByName, category: searchByCategory,price, size, rating, brand })
