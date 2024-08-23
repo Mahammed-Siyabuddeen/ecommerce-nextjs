@@ -7,7 +7,11 @@ import { RootState } from '@/features/redux/store';
 import { AddReviewApi } from '@/Services/addReview.service';
 import ApiErrorResponse from '@/Services/ApiErrorResponse';
 
-const AddReview = ({ orderitem_id }: { orderitem_id: string }) => {
+interface prop{
+    setOpenReviewComponent: React.Dispatch<React.SetStateAction<boolean>>,
+    orderitem_id: string 
+}
+const AddReview = ({ orderitem_id,setOpenReviewComponent }: prop) => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState<string | undefined>(undefined);
     const user = useSelector((state: RootState) => state.user)
@@ -18,6 +22,7 @@ const AddReview = ({ orderitem_id }: { orderitem_id: string }) => {
         AddReviewApi({ orderItem_id: orderitem_id, rating, comment, user_id: user._id })
             .then(() => toast.success("Thank you for reviewing the product."))
             .catch((error) => ApiErrorResponse(error))
+            setOpenReviewComponent(false);
     }
     return (
         <form onSubmit={handleReviewSubmit} className="">
