@@ -19,7 +19,7 @@ const Order = ({ orderdata }: { orderdata: orderDetailsType }) => {
             </div>
             <div className="w-2/4 flex items-center justify-between">
                 <p>&#8377; {orderdata.totalPrice}</p>
-                <p>&#8377; {orderdata.quantity}</p>
+                <p> {orderdata.quantity}</p>
                 <div className='flex gap-2 items-center'>
                     <div className="text-blue-500"> <RoundIcon /> </div>
                     <p>Delivered on jun 26th</p>
