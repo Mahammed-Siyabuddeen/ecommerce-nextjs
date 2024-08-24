@@ -1,6 +1,7 @@
 'use client';
 import Loading from '@/components/Loading';
-import { clearUser, userType } from '@/features/authSlice';
+import { userType } from '@/components/Types/userType';
+import { clearUser } from '@/features/authSlice';
 import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -25,7 +26,7 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
             }
         }
         verifytoken()
-    }, [router])
+    }, [router,Dispatch])
 
     if (isvalidtoken === null) return <Loading />
     return (

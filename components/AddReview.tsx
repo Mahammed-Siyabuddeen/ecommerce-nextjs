@@ -31,8 +31,8 @@ const AddReview = ({ orderitem_id,setOpenReviewComponent }: prop) => {
                     <h1 className="font-semibold text-base mb-2">Rate this Product</h1>
                     <div className="flex gap-2 text-xl">
                         {Array.from({ length: 5 }).map((_, index) => {
-                            if (index + 1 <= rating) return (<StarIcon className="cursor-pointer" onClick={() => setRating(index + 1)} />)
-                            else return (<OutlineStarIcon className="cursor-pointer" onClick={() => setRating(index + 1)} />)
+                            if (index + 1 <= rating) return (<StarIcon key={index} className="cursor-pointer" onClick={() => setRating(index + 1)} />)
+                            else return (<OutlineStarIcon key={index} className="cursor-pointer" onClick={() => setRating(index + 1)} />)
                         })}
                     </div>
                 </div>

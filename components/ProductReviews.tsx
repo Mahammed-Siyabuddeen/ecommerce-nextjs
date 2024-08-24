@@ -17,7 +17,7 @@ const ProductReviews = ({ product_id }: { product_id: string }) => {
             setTotalRating(data[1].data)
         }
         get()
-    },[])
+    },[product_id])
     if (!reviews.length) return <></>
     return (
         <div className='m-1 box_shadow rounded'>
@@ -32,7 +32,7 @@ const ProductReviews = ({ product_id }: { product_id: string }) => {
                 <div className="flex-1 overflow-scroll">
                     {
                         reviews.map((review: reviewType) => (
-                            <Review review={review} />
+                            <Review key={review._id} review={review} />
                         ))
                     }
                 </div>

@@ -26,7 +26,7 @@ const DashBoardHeader = () => {
             }
         }
         get();
-    }, [])
+    }, [Dispatch])
     return (
         <>
             <div className="p-8 items-center w-40 justify-evenly box_shadow  flex flex-col bg-white rounded ">

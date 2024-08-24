@@ -33,7 +33,7 @@ const ProductRecords = ({setAddproduct}:prop) => {
         getAllProducts().then(({data})=>{
             Dispatch(setAllProdcuts(data))
         }).catch((error)=>ApiErrorResponse(error))
-    },[setAddproduct])
+    },[setAddproduct,Dispatch])
 
     return (
         <div className="w-full overflow-x-scroll">

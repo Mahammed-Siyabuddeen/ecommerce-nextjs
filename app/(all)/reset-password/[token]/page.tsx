@@ -8,7 +8,7 @@ import { resetPaaswordApi } from '@/Services/resetPasswordApi.service'
 import ApiErrorResponse from '@/Services/ApiErrorResponse'
 import { useDispatch } from 'react-redux'
 import { setUser } from '@/features/authSlice'
-const page = () => {
+const PageComponent = () => {
     const params = useParams()
     const Dispatch=useDispatch()
     const router=useRouter()
@@ -60,4 +60,4 @@ const page = () => {
     )
 }
 
-export default page
+export default PageComponent

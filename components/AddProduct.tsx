@@ -216,7 +216,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
                     <div className="py-2">
                         <label htmlFor="" className="font-bold text-sm py-3">Description</label>
                         <textarea value={description}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
+                            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
                             rows={5} name="description" id="description" className="w-full p-4 outline-none border my-2 "></textarea>
                     </div>
                 </div>

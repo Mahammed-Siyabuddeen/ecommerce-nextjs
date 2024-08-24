@@ -20,7 +20,7 @@ const HeroSection = () => {
             <div className="relative  overflow-hidden rounded-lg ">
                 {
                     banners.map((banner: bannerType, index) => (
-                        <div className={`duration-700 h-full ease-in-out ${index == count ? 'block' : 'hidden'}`} data-carousel-item>
+                        <div key={banner._id} className={`duration-700 h-full ease-in-out ${index == count ? 'block' : 'hidden'}`} data-carousel-item>
                             <Slider banner={banner} />
                         </div>
                     ))

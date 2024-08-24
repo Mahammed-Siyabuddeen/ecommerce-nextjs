@@ -24,7 +24,7 @@ const Header = () => {
         }
         ).catch((error)=>{console.log(error);
         })
-    },[user])
+    },[user,Dispatch])
     return (
         <div className="container mx-auto flex items-center w-screen p-4">
             <Link href={'/'} className="basis-1/4">

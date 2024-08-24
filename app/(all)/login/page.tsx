@@ -7,7 +7,7 @@ const Page = () => {
     return (
       <div className="container mx-auto">
         
-        <Login/>
+        <Login admin={false}/>
       </div>
     )
 }

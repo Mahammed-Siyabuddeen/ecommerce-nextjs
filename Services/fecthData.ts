@@ -1,7 +1,7 @@
 import axios, { AxiosHeaders, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
 
 export const fecthFormData = axios.create({
-  baseURL: 'http://localhost:9000',
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   headers: {
     'Content-Type': 'multipart/form-data',
   },
@@ -9,7 +9,7 @@ export const fecthFormData = axios.create({
 
 
 export const fecthData = axios.create({
-  baseURL: 'http://localhost:9000',
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL||"http://134.209.121.246/",
   withCredentials: true
 
 })

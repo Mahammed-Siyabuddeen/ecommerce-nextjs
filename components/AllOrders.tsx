@@ -23,7 +23,7 @@ const AllOrders = () => {
             dispatch(setAllorders(data))
         }).catch((err) => ApiErrorResponse(err))
         setLoading(false)
-    }, [])
+    }, [dispatch])
   
     const changeOrder=()=>{
         dispatch(sortArray(sortorder))

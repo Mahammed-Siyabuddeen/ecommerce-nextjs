@@ -9,7 +9,7 @@ import { getOrderDetails } from '@/Services/orders.service';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
-const page = () => {
+const PageComponent = () => {
     const user = useSelector((state: RootState) => state.user)
     const { filter, orders } = useSelector((state: RootState) => state.orderDetails)
     const dispatch = useDispatch<AppDispatch>();
@@ -20,7 +20,7 @@ const page = () => {
             console.log(data);
 
         }).catch((error) => ApiErrorResponse(error))
-    }, [user]);
+    }, [user,dispatch]);
 
     const filteredOrders = orders.filter((item) => {
         if (filter === 'all') return true;
@@ -48,4 +48,4 @@ const page = () => {
     )
 }
 
-export default page
+export default PageComponent

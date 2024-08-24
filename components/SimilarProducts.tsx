@@ -14,7 +14,7 @@ const SimilarProducts:FC<prop> = ({category_id,product_id}) => {
     getRelatedProducts({category_id,product_id})
     .then(({data})=>setProducts(data))
     .catch((error)=>ApiErrorResponse(error));
-  },[])
+  },[category_id,product_id])
   if(!products.length) return<></>
   return (
     <div className=''>
@@ -22,7 +22,7 @@ const SimilarProducts:FC<prop> = ({category_id,product_id}) => {
       <div className="grid  gap-5 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
         {
           products.map((item:productType)=>(
-            <Product productinfo={item} />
+            <Product key={item._id} productinfo={item} />
           ))
         }
 

@@ -27,7 +27,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
     } catch (error) {
       router.push('/admin-auth')
     }
-  })
+  },[Dispatch,router])
 
   if (isvalidtoken == null) return <Loading />
   return (

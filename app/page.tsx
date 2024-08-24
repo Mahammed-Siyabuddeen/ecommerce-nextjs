@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div>
       <Header/>
-      <Navigation/>
+      {/* <Navigation/> */}
       <HeroSection/>
       <CategoryList/>
       <PopularProduct/>

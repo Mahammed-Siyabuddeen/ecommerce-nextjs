@@ -27,7 +27,7 @@ const PopupAccount = () => {
             {isOpen && (
                 <div
                     id="select-modal"
-                    tabIndex="-1"
+                    tabIndex={-1}
                     aria-hidden={!isOpen}
                     className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-gray-900 bg-opacity-50"
                 >

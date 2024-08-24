@@ -32,7 +32,7 @@ const OrderDetails = ({ order_id, orderitem_id }: prop) => {
         ApiErrorResponse(err);
         setLoading(false)
       })
-  }, [])
+  }, [order_id,orderitem_id])
 
   if (loading) return (<>Loading</>)
   if (typeof data === 'undefined') {
