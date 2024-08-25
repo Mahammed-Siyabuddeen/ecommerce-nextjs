@@ -30,9 +30,9 @@ jobs:
 
     - name: Copy files via SSH
       run: |
-        rsync -avz --exclude='node_modules' --exclude='.env' --delete . root@your_droplet_ip:/path/to/nextjs-repo
+        rsync -avz --exclude='node_modules' --exclude='.env' --delete . root@134.209.121.246:/var/www/frontend
       env:
         SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
 
     - name: Restart PM2
-      run: ssh root@your_droplet_ip 'npm install && pm2 restart nextjs'
+      run: ssh root@134.209.121.246 'npm install && pm2 restart nextjs'
