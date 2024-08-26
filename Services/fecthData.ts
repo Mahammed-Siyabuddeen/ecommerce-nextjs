@@ -1,5 +1,5 @@
 import axios, { AxiosHeaders, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:9000'
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL 
 export const fecthFormData = axios.create({
   baseURL: API_BASE_URL,
   headers: {
