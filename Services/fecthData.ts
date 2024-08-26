@@ -9,7 +9,7 @@ export const fecthFormData = axios.create({
 
 
 export const fecthData = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL||"http://134.209.121.246/",
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   withCredentials: true
 
 })

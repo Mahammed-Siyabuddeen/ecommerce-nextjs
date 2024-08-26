@@ -52,7 +52,7 @@ const Billing = () => {
             clientSecret,
             elements,
             confirmParams: {
-                return_url: 'http://localhost:3000/successpayment',
+                return_url: `${process.env.NEXT_PUBLIC_BACKEND_URL as string}/successpayment`,
             },
 
         })
