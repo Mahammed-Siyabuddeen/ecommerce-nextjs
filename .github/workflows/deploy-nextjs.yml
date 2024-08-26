@@ -17,16 +17,16 @@ jobs:
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        
+     - name: Add SSH known hosts
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
 
     - name: Build Next.js App
       run: |
         npm install
         npm run build
-
-    - name: Add SSH known hosts
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
 
     - name: Copy files via SSH
       run: |
@@ -35,4 +35,4 @@ jobs:
         SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
 
     - name: Restart PM2
-      run: ssh root@134.209.121.246 'npm install && pm2 restart nextjs'
+      run: ssh root@134.209.121.246 'cd /var/www/frontend && npm install && pm2 restart nextjs'
