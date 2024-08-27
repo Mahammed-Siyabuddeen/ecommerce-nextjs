@@ -22,17 +22,17 @@ jobs:
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+ 
+     - name: Copy files via SSH
+      run: |
+        rsync -avz --exclude='node_modules' --exclude='.env' --delete . root@134.209.121.246:/var/www/frontend
+      env:
+        SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
 
     - name: Build Next.js App
       run: |
         npm install
         npm run build
-
-    - name: Copy files via SSH
-      run: |
-        rsync -avz --exclude='node_modules' --exclude='.env' --delete . root@134.209.121.246:/var/www/frontend
-      env:
-        SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
 
     - name: Restart PM2
       run: ssh root@134.209.121.246 'cd /var/www/frontend && npm install && pm2 restart nextjs'
