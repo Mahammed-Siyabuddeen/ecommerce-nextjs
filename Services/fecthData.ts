@@ -30,7 +30,7 @@ fecthData.interceptors.request.use((req: any) => {
       }
     }
   } catch (error) {
-    console.log("axios erro", error);
+    console.log(error);
   }
   return req;
 })
@@ -46,7 +46,7 @@ fecthFormData.interceptors.request.use((req: any) => {
       }
     }
   } catch (error) {
-    console.log("axios erro", error);
+    console.log("axios error", error);
   }
   return req;
 })

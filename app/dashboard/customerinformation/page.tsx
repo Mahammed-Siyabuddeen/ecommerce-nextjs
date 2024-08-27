@@ -11,8 +11,6 @@ const Page = () => {
     getAllCustomers().then(({data})=>setCustomers(data))
     .catch((error)=>ApiErrorResponse(error))
    },[])
-    console.log(customers);
-    
     return (
             <CustomersProfile customers={customers}/>
     )

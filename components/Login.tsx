@@ -28,7 +28,6 @@ const Login = ({ admin }: { admin: boolean }) => {
         e.preventDefault();
         if (admin) {
             adminLoginApi({ email, password }).then(({ data }) => {
-                console.log(data);
                 Dispatch(setAdmin(data))
                 router.push('/dashboard')
             }).catch(err => ApiErrorResponse(err))

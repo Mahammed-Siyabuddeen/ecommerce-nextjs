@@ -71,11 +71,8 @@ const AddProduct = ({ setAddproduct }: prop) => {
         ])
 
     }, [category])
-    console.log(check);
-
     useEffect(() => {
         getAllCategory().then(({ data }: { data: categoryType[] }) => {
-            console.log(data);
             setCategoryList(data)
 
         })
@@ -87,8 +84,6 @@ const AddProduct = ({ setAddproduct }: prop) => {
 
         if (image.length == 4) {
             let newImages = image.splice(0, 1);
-            console.log(newImages);
-
             return setImage([...newImages, e.target.files[0]])
 
         }
@@ -103,8 +98,6 @@ const AddProduct = ({ setAddproduct }: prop) => {
                 data.label === value ? { ...data, checked: true } : data
             )
         )
-        console.log(check);;
-
 
     }
     const handleSubmit = async (e: FormEvent) => {
@@ -125,15 +118,12 @@ const AddProduct = ({ setAddproduct }: prop) => {
             form.append('stock_quantity', stock_quantity),
             form.append('category_id', category)
         form.append('sizes', JSON.stringify(selectedSizes))
-        console.log('here is there');
 
         addProduct(form).then(({ data }) => {
-            console.log(data);
             Dispatch(appendToAllProducts({ ...data, orderQuantity: 0, totalSale: 0 }))
             setLoading(false)
             toast.success('successfully product added')
         }).catch((error) => {
-            console.log('not go');
 
             ApiErrorResponse(error)
         })

@@ -17,8 +17,7 @@ import { usePathname } from 'next/navigation'
 const Product = ({productinfo }: { productinfo: productType }) => {
   const user=useSelector((state:RootState)=>state.user)
   const pathname=usePathname()
-  console.log(productinfo);
-  
+
   if (!productinfo) return <>proudct not found</>
 
   const handleAddtoWishList=()=>{

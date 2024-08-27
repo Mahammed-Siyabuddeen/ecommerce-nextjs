@@ -17,8 +17,6 @@ const PageComponent = () => {
         if (!user._id.length) return;
         getOrderDetails({ user_id: user._id }).then(({ data }) => {
             dispatch(setOrderDetails(data))
-            console.log(data);
-
         }).catch((error) => ApiErrorResponse(error))
     }, [user,dispatch]);
 
@@ -26,8 +24,6 @@ const PageComponent = () => {
         if (filter === 'all') return true;
         return item.status === filter;
     })
-    console.log(filter);
-    
     return (
         <div className="container mx-auto flex gap-4 h-full w-full my-12">
             <div className="basis-1/5 bg-gray-100 rounded">

@@ -19,7 +19,6 @@ const Header = () => {
     useEffect(()=>{
         if(!user || !user._id)return;
         getCartCount({user_id:user._id}).then(({data})=>{
-            console.log(data);
             Dispatch(setCartCount(data))
         }
         ).catch((error)=>{console.log(error);

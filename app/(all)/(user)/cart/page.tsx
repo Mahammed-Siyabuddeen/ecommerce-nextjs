@@ -17,7 +17,6 @@ const Page: FC = () => {
   useEffect(() => {
     if (!user._id) return;
     getcartItems({ user_id: user._id }).then(({ data }: { data: cartType[] }) => {
-      console.log(data);
       dispatch(setCartItems(data));
     }).catch((error) => ApiErrorResponse(error))
   }, [dispatch, user])

@@ -38,7 +38,6 @@ const Signup = () => {
             return;
 
         SignUpApi({ ...data }).then(({ data }) => {
-            console.log(data);
             Dispatch(setUser(data));
             router.push('/')
         }).catch((err) => {

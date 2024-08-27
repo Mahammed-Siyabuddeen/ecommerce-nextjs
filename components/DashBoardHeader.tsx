@@ -17,7 +17,6 @@ const DashBoardHeader = () => {
 
             try {
                 const data = await Promise.all([getTotalSales(), getTotalProducts(), getTotalOrders(), getTotalCustomers()]);
-                console.log(data)
                 Dispatch(setTotalSales(data[0].data as number))
                 Dispatch(setTotalProducts(data[1].data as number))
                 Dispatch(setTotalOrders(data[2].data as number))

@@ -11,8 +11,7 @@ import { addProducts } from '@/features/productSlice'
 const Products= ({products}:{products:productType[]}) => {
     const dispatch=useDispatch<AppDispatch>()
     const data=useSelector((state:RootState)=>state.proudcts)
-    console.log(data);
-    
+
     useEffect(()=>{
         dispatch(addProducts(products))
     },[dispatch,products])

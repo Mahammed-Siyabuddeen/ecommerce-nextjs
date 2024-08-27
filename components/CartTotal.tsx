@@ -14,7 +14,6 @@ function CartTotal() {
 
     const router = useRouter();
     const pathname = usePathname()
-    console.log(pathname);
 
     const {cartitems} = useSelector((state: RootState) => state.cart)
     const checkout = useSelector((state: RootState) => state.checkout)

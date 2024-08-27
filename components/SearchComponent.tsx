@@ -54,7 +54,6 @@ const Search = () => {
         const searchByCategory = searchParams.get('category') || undefined
         getAllProductsapi({ name: searchByName, category: searchByCategory,price, size, rating, brand })
             .then(({ data }) => {
-                console.log(data);
                 setData(data)
             })
             .catch((err) => console.log(err)

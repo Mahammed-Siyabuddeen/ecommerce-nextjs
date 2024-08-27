@@ -5,8 +5,6 @@ import ReactPDF, { PDFDownloadLink, PDFRenderer } from '@react-pdf/renderer'
 import { orderDetailsType } from './Types/orderDetailType'
 
 const OrderAddress = ({ address, data }: { address: addressType, data: orderDetailsType }) => {
-console.log(data);
-
     const handleclick = () => {
         ReactPDF.render(<PdfRender data={data} />, './invoice')
     }

@@ -8,13 +8,6 @@ import PopupAccount from './PopupAccount';
 import { OrderIcon } from './Icons/OrderIcon';
 const AccountLabel: FC = () => {
   const user = useSelector((state: RootState) => state.user);
-  
-  useEffect(()=>{
-    if(user && !user._id.length){
-      console.log('user not found=========================');
-      
-    }
-  },[user])
 
   if(user===null) return(<></>)
   if (!user.first_name.length) return (

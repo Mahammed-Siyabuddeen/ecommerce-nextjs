@@ -23,7 +23,6 @@ const CartItem = ({ items }: { items: cartType }) => {
         dispatch(setQuantity([value, items.cartItem_id]))
         changeCartItemsQuantity({ quantity: value, cartItem_id: items.cartItem_id })
         .then(({ data }) => {
-            console.log(data);
         }).catch((error) => ApiErrorResponse(error));
 
     }

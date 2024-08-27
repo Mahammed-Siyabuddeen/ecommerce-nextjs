@@ -20,12 +20,8 @@ const cartSlice=createSlice({
         },
         setQuantity:(state,action:PayloadAction<[number,string]>)=>{
             const [quantity,_id]=action.payload
-            console.log(quantity,_id);
-            
             state.cartitems.map((item:cartType)=>{
                 if(item.cartItem_id===_id){
-                    console.log(item._id,_id);
-                    
                     let tempQty=item.quantity;
                     if((tempQty+=quantity)!==0){
                          item.quantity+=quantity;
@@ -34,7 +30,6 @@ const cartSlice=createSlice({
                 }
                 return item;
             })
-            console.log(action.payload,state);
             
         },
         removeitem:(state,action:PayloadAction<string>)=>{
@@ -42,7 +37,6 @@ const cartSlice=createSlice({
             return state;
         },
         setCartCount:(state,action:PayloadAction<number>)=>{
-            console.log(action.payload);
             state.Count=action.payload;
             
             return state;

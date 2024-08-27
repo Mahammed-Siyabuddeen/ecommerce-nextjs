@@ -15,8 +15,6 @@ const SearchForm = () => {
     const router = useRouter();
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        console.log('submit working');
-        
         if (!searchQuery.length) return;
         router.push(`/search?name=${searchQuery}`)
     }

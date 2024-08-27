@@ -5,8 +5,6 @@ import React, { useState } from 'react'
 
 const Page = () => {
   const [addProduct, setAddproduct] = useState<boolean>(false)
-console.log(addProduct);
-
   if (addProduct)
     return (<AddProduct setAddproduct={setAddproduct}/>)
 

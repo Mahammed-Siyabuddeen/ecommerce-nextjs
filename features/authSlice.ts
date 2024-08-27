@@ -8,7 +8,6 @@ const initialState = (): userType => {
         const storedState = window.localStorage.getItem('profile')
         if (storedState) {
             const user: userType = JSON.parse(storedState)
-            console.log(user.token);
             const token = jwtDecode(user.token);
             if ((token.exp as number) * 1000 < new Date().getTime()) {
                 localStorage.removeItem('profile');
@@ -31,10 +30,7 @@ const authSlice = createSlice(
                 return action.payload;
             },
             clearUser: (state) => {
-                console.log('clering user');
-
                 localStorage.removeItem('profile')
-                // return state
             }
         }
     }

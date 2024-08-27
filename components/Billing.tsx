@@ -21,7 +21,6 @@ const Billing = () => {
         if (!checkout.checkout_products.length || !user._id.length) return;
         const cart_id=checkout.checkout_products[0]._id;
         const cartItem_id = checkout.checkout_products.length == 1 ? checkout.checkout_products[0].cartItem_id : undefined
-        console.log(cartItem_id);
 
     getClientSecret({
             amount: checkout.total_amount,
@@ -30,7 +29,6 @@ const Billing = () => {
             user_id: user._id,
             ...address
         }).then(({ data }) => {
-            console.log(data.clientSecret);
             setClientSecret(data.clientSecret)
 
         }).catch((error) => ApiErrorResponse(error))

@@ -4,7 +4,6 @@ import { getProductDetails } from '@/Services/products.services'
 import { productType } from '@/components/Types/productType';
 
 const Page =async ({params}:{params:{id:string}}) => {
-  console.log(params.id);
   const {data}:{data:productType}=await getProductDetails(params.id)
   
   return (

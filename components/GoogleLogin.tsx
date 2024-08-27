@@ -12,7 +12,6 @@ const GoogleLoginComponent = () => {
     const user = useSelector((state: RootState) => state.user)
 
     const handleAuthSuccess = (credentialResponse: CredentialResponse) => {
-        console.log(credentialResponse);
         if (!credentialResponse.clientId || !credentialResponse.credential)
             return
 
@@ -21,7 +20,6 @@ const GoogleLoginComponent = () => {
                 data: { clientId: credentialResponse.clientId, credential: credentialResponse.credential }
             }
         ).then(({data})=>{
-                console.log(data);
                 Dispatch(setUser({...data}));
                 router.push('/');
                 

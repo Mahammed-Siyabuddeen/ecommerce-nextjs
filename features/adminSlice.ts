@@ -8,7 +8,6 @@ const initialState = (): adminType => {
         const storedState = window.localStorage.getItem('adminProfile')
         if (storedState) {
             const admin: adminType = JSON.parse(storedState)
-            console.log(admin.token);
             const token = jwtDecode(admin.token);
             if ((token.exp as number) * 1000 < new Date().getTime()) {
                 localStorage.removeItem('adminProfile');

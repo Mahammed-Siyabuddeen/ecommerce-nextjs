@@ -16,7 +16,10 @@ interface prop {
     _id: string
 }
 const Category = async ({ name }: { name: string }) => {
+    
     const { data }: AxiosResponse<prop> = await getCategoryID(name)
+   console.log(data);
+   
     return (
         <Link href={`/search?category=${data._id}`} className="flex flex-col gap-3 items-center w-24 bg-slate-200 rounded-full h-24 justify-center">
             {

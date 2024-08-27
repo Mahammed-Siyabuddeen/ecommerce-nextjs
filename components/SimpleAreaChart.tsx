@@ -9,7 +9,6 @@ const SimpleAreaChart = () => {
   const[data,setData]=useState<salesByMonthType[]>([])
   useEffect(()=>{
     getTotalSalesByMonth().then(({data})=>{
-      console.log(data);
       setData(data)
     }).catch((error)=>ApiErrorResponse(error))
   },[])

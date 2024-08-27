@@ -7,8 +7,6 @@ const OrderFilters = () => {
     const Dispatch=useDispatch<AppDispatch>()
 
     const handleFilters = (value: string) => {
-        console.log(value);
-        
         Dispatch(filterOrders(value))
     }
     return (

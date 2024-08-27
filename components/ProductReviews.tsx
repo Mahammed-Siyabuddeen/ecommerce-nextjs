@@ -12,7 +12,6 @@ const ProductReviews = ({ product_id }: { product_id: string }) => {
     useEffect(() => {
         async function get() {
             const data = await Promise.all([getReviewApi({ product_id }), getRating({ product_id })])
-            //   .catch(()=>{console.log('error');}) 
             setReviews(data[0].data)
             setTotalRating(data[1].data)
         }

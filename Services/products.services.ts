@@ -24,8 +24,6 @@ export const getAllProductsapi = (query: prop) => {
         params.append('rating', query.rating)
     if(query.size)
         params.append('size', query.size)
-    console.log(params);
-
     return fecthData.get(`/product/getproducts?${params.toString()}`)
 }
 export const getProductDetails = (param: string) => fecthData.get(`/product/getproduct/${param}`)

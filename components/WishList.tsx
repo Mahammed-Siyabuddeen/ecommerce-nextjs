@@ -15,7 +15,6 @@ const WishList = () => {
     useEffect(() => {
         if (!user._id) return;
         getWishListItems({ user_id: user._id }).then(({ data }) => {
-            console.log(data);
             setWishListItems(data)
         }).catch((error) => ApiErrorResponse(error))
     }, [user])
