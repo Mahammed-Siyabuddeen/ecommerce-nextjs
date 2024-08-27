@@ -1,7 +1,6 @@
 import axios, { AxiosHeaders, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL 
 export const fecthFormData = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   headers: {
     'Content-Type': 'multipart/form-data',
   },
@@ -9,7 +8,7 @@ export const fecthFormData = axios.create({
 
 
 export const fecthData = axios.create({
-  baseURL: API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
   withCredentials: true
 
 })
