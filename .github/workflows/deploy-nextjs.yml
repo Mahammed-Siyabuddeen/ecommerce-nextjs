@@ -23,7 +23,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
  
-     - name: Copy files via SSH
+    - name: Copy files via SSH
       run: |
         rsync -avz --exclude='node_modules' --exclude='.env' --delete . root@134.209.121.246:/var/www/frontend
       env:
