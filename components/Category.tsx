@@ -1,5 +1,6 @@
+'use client';
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BooksIcon } from './Icons/BooksIcon'
 import { getCategoryID } from '@/Services/category.service'
 import { AxiosResponse } from 'axios'
@@ -15,11 +16,13 @@ interface prop {
     name: string,
     _id: string
 }
-const Category = async ({ name }: { name: string }) => {
-    
-    const { data }: AxiosResponse<prop> = await getCategoryID(name)
-   console.log(data);
-   
+const Category =({ name }: { name: string }) => {
+    const [data,setData]=useState<prop>({name:"",_id:""})
+    useEffect(()=>{
+        getCategoryID(name).then(({data})=>{
+            setData(data)
+        })
+    },[])
     return (
         <Link href={`/search?category=${data._id}`} className="flex flex-col gap-3 items-center w-24 bg-slate-200 rounded-full h-24 justify-center">
             {

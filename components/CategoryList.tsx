@@ -1,13 +1,4 @@
 import React, { FC } from 'react'
-import { BooksIcon } from './Icons/BooksIcon'
-import { ElectronicsIcon } from './Icons/ElectronicsIcon'
-import { FurnitureIcon } from './Icons/FurnitureIcon'
-import { MensClothesIcon } from './Icons/MensclothIcons'
-import { ShoesIcon } from './Icons/ShoesIcon'
-import { SportsIcon } from './Icons/SportsIcon'
-import { ToysIcon } from './Icons/Toys'
-import { WomensClothesIcon } from './Icons/WomenclothIcon'
-import Link from 'next/link'
 import Category from './Category'
 
 const CategoryList:FC = () => {
