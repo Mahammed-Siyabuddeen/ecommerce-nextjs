@@ -83,7 +83,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
             return alert("image not selected");
 
         if (image.length == 4) {
-            let newImages = image.splice(0, 1);
+            let newImages = image.slice(1);
             return setImage([...newImages, e.target.files[0]])
 
         }
@@ -134,7 +134,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
         <form onSubmit={handleSubmit} className="w-full bg-sky-50 overflow-y-scroll">
             <h1 className="p-4 text-xl font-bold" >Add Product</h1>
             <div className="flex justify-end py-4">
-                <button onClick={() => setAddproduct(false)} className="max-w-fit px-2 py-3 bg-black text-white  m-2  rounded-lg flex gap-1 items-center border">View Product</button>
+                <button onClick={() => setAddproduct(false)} className="max-w-fit px-2 py-3 bg-yellow-400 text-slate-950 outline-none  m-2  rounded-lg flex gap-1 items-center border">View Product</button>
             </div>
 
             <div className=" w-auto flex gap-2 justify-between  mx-6 ">
@@ -265,10 +265,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
                             <div className="w-full relative h-full bg-slate-200 grid  flex-col justify-center place-items-center place-content-center text-5xl">
                                 {
                                     image.length >= 4 ? (
-                                        // <></>
                                         <img width={'100%'} height={'100%'} alt='nonn' src={URL.createObjectURL(image[3])} />
-
-                                        // <Image fill alt='nonn' src={URL.createObjectURL(image[3])} />
                                     ) :
                                         <>
                                             <UploadIcon />
@@ -280,7 +277,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
                         </div>
 
                     </div>
-                    <button disabled={loading?true:false} type='submit' className="p-3 px-6 bg-yellow-300 m-3 rounded disabled:bg-yellow-200">Sumbit</button>
+                    <button disabled={loading?true:false} type='submit' className="p-3 px-6 text-slate-950 bg-yellow-400 m-3 rounded disabled:bg-yellow-200">Sumbit</button>
                 </div>
             </div>
         </form>

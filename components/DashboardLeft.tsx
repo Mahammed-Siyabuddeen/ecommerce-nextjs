@@ -18,6 +18,7 @@ const DashboardLeft: FC = () => {
     const Dispatch = useDispatch<AppDispatch>();
     const router=useRouter()
     const handleAdminLogout = () => {
+        if(!window.confirm("Are you sure you want to log out?"))  return;
         Dispatch(clearAdmin())
         router.push("/");
     }
@@ -29,31 +30,31 @@ const DashboardLeft: FC = () => {
             </div>
             <div className="flex gap-1 items-center cursor-pointer hover:bg-slate-200 p-3 m-2 rounded-sm">
                 <DashboardIcon />
-                <Link href='/dashboard' className="font-medium">Dashbord</Link>
+                <Link href='/dashboard' title='dashboard' className="font-medium">Dashbord</Link>
             </div>
             <div className="flex gap-1 items-center cursor-pointer hover:bg-slate-200 p-3 m-2 rounded-sm">
                 <OrderIcon />
-                <Link href='/dashboard/orders' className="font-medium">Order</Link>
+                <Link href='/dashboard/orders' title='orders' className="font-medium">Order</Link>
             </div>
             <div className="flex gap-1 items-center cursor-pointer hover:bg-slate-200 p-3 m-2 rounded-sm">
                 <ProductIcon />
-                <Link href='/dashboard/products' className="font-medium">Products</Link>
+                <Link href='/dashboard/products' title='products' className="font-medium">Products</Link>
             </div>
             <div className="flex gap-1 items-center cursor-pointer hover:bg-slate-200 p-3 m-2 rounded-sm">
                 <CustomerIcon />
-                <Link href='/dashboard/customerinformation' className="font-medium">Customers</Link>
+                <Link href='/dashboard/customerinformation' title='customers' className="font-medium">Customers</Link>
             </div>
             <div className="flex gap-1 items-center cursor-pointer hover:bg-slate-200 p-3 m-2 rounded-sm">
                 <div > <CatergoryIcon /></div>
-                <Link href='/dashboard/categories' className="font-medium">Categories</Link>
+                <Link href='/dashboard/categories' title='categories' className="font-medium">Categories</Link>
             </div>
             <div className="flex gap-1 items-center cursor-pointer hover:bg-slate-200 p-3 m-2 rounded-sm">
                 <div > <BannerIcon /></div>
-                <Link href='/dashboard/banners' className="font-medium">Banners</Link>
+                <Link href='/dashboard/banners' title='banners' className="font-medium">Banners</Link>
             </div>
             <div onClick={handleAdminLogout} className="flex gap-1 items-center cursor-pointer hover:bg-slate-200 p-3 m-2 rounded-sm">
                 <div > <AdminIcon /></div>
-                <Link href='/dashboard/banners' className="font-medium">Banners</Link>
+                <p title='logout'>Logout</p>
             </div>
         </div>
     )
