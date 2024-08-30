@@ -7,7 +7,13 @@ import { toast } from "sonner";
 export default function ApiErrorResponse(error: any) {
     const axiosError = error as AxiosError<ApiErrorResponseType>;
     if (axiosError.response) {
-       toast.error(axiosError.response.data.message)
+        console.log(axiosError.response);
+        if(axiosError.response.data.errors[0].msg){
+            toast.error(axiosError.response.data.errors[0].msg);
+        }else{
+
+            toast.error(axiosError.response.data.message)
+        }
     } else {
         console.log('An unexpected error occurred');
     }

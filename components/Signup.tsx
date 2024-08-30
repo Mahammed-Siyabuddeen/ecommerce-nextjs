@@ -9,6 +9,8 @@ import { AppDispatch } from '@/features/redux/store';
 import { setUser } from '@/features/authSlice';
 import { useRouter } from 'next/navigation';
 import GoogleLoginComponent from './GoogleLogin';
+import ApiErrorResponse from '@/Services/ApiErrorResponse';
+import { toast } from 'sonner';
 
 const Signup = () => {
     const [isOpen, setIsOpne] = useState<boolean>(false);
@@ -33,16 +35,14 @@ const Signup = () => {
             email,
             password
         }
-
-        if (first_name.length < 0 || last_name.length < 0 || email.length < 0 || password.length < 0 || password !== rpassword)
-            return;
+        if(password!==rpassword) return toast.error("Passwords must match.")
+        
 
         SignUpApi({ ...data }).then(({ data }) => {
             Dispatch(setUser(data));
             router.push('/')
         }).catch((err) => {
-            console.log(err);
-
+            ApiErrorResponse(err)
         })
     }
 
@@ -62,24 +62,24 @@ const Signup = () => {
             <div className=" font-medium gap-1 flex  shadow-sm  w-fll">
                 <div className='basis-2/4 flex flex-col gap-1 '>
                     <label htmlFor="">First Name</label>
-                    <input value={first_name} onChange={(e: ChangeEvent<HTMLInputElement>) => setfname(e.target.value)} placeholder='enter first name' name='first_name' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && first_name.length < 1 ? 'border-red-500' : ''}`} />
+                    <input required value={first_name} onChange={(e: ChangeEvent<HTMLInputElement>) => setfname(e.target.value)} placeholder='enter first name' name='first_name' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && first_name.length < 1 ? 'border-red-500' : ''}`} />
 
                 </div>
                 <div className='basis-2/4 flex flex-col gap-1'>
                     <label htmlFor="">Last name</label>
-                    <input value={last_name} onChange={(e: ChangeEvent<HTMLInputElement>) => setlname(e.target.value)} placeholder='enter last name' name='last_name' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && last_name.length < 1 ? 'border-red-500' : ''}`} />
+                    <input required value={last_name} onChange={(e: ChangeEvent<HTMLInputElement>) => setlname(e.target.value)} placeholder='enter last name' name='last_name' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && last_name.length < 1 ? 'border-red-500' : ''}`} />
 
                 </div>
             </div>
             <div className=" font-medium gap-1 flex shadow-sm w-full">
                 <div className='basis-2/4 flex flex-col gap-1'>
                     <label htmlFor="">phone_number</label>
-                    <input value={phone_number} onChange={(e: ChangeEvent<HTMLInputElement>) => setphone(e.target.value)} pattern="[7-9]{1}[0-9]{4}[0-9]{5}" placeholder='enter your number' name='phone_number' type="tel" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && phone_number == undefined ? 'border-red-500' : ''}`} />
+                    <input required value={phone_number} onChange={(e: ChangeEvent<HTMLInputElement>) => setphone(e.target.value)} pattern="[7-9]{1}[0-9]{4}[0-9]{5}" placeholder='enter your number' name='phone_number' type="tel" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && phone_number == undefined ? 'border-red-500' : ''}`} />
 
                 </div>
                 <div className='basis-2/4 flex flex-col gap-1'>
                     <label htmlFor="">Email</label>
-                    <input value={email} onChange={(e: ChangeEvent<HTMLInputElement>) => setemail(e.target.value)} placeholder='enter your email' name='email' type="email" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && email.length < 1 ? 'border-red-500' : ''}`} />
+                    <input required value={email} onChange={(e: ChangeEvent<HTMLInputElement>) => setemail(e.target.value)} placeholder='enter your email' name='email' type="email" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && email.length < 1 ? 'border-red-500' : ''}`} />
 
                 </div>
 
@@ -88,8 +88,8 @@ const Signup = () => {
             <div className=" font-medium gap-1 flex shadow-sm">
                 <div className='basis-2/4 flex flex-col gap-1'>
                     <label htmlFor="">Password</label>
-                    <div className={`flex justify-between px-3 items-center border rounded-md p-3 font-medium w-full ${checkinput && password.length < 1 ? 'border-red-500' : ''}`}>
-                        <input value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setpassword(e.target.value)} name='password' placeholder='enter your password' type={isOpen ? "text" : "password"} className=' outline-none  grow' />
+                    <div className={`flex justify-between px-3 items-center border rounded-md p-3 font-medium w-full    `}>
+                        <input required value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setpassword(e.target.value)} name='password' placeholder='enter your password' type={isOpen ? "text" : "password"} className=' outline-none  grow' />
                         {
                             isOpen ? (<EyeClosedIcon onClick={() => setIsOpne(!isOpen)} />) : (<EyeOpenIcon onClick={() => setIsOpne(!isOpen)} />)
                         }
@@ -97,8 +97,8 @@ const Signup = () => {
                 </div>
                 <div className='basis-2/4 flex flex-col gap-1'>
                     <label htmlFor="">Password</label>
-                    <div className={`flex justify-between px-3 items-center border rounded-md p-3 font-medium w-full ${checkinput && rpassword.length < 1 || rpassword !== password ? 'border-red-500' : ''}`}>
-                        <input value={rpassword} onChange={(e: ChangeEvent<HTMLInputElement>) => setrpassword(e.target.value)} placeholder='enter your password' type="password" className=' outline-none  grow' />
+                    <div className={`flex justify-between px-3 items-center border rounded-md p-3 font-medium w-full `}>
+                        <input required value={rpassword} onChange={(e: ChangeEvent<HTMLInputElement>) => setrpassword(e.target.value)} placeholder='enter your password' type="password" className=' outline-none  grow' />
                         <EyeClosedIcon />
                     </div>
                 </div>
