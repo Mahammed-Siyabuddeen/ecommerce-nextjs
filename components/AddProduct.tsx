@@ -32,7 +32,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
     const [categoryList, setCategoryList] = useState<categoryType[]>([])
     const [size, setSize] = useState<string>();
     const [sizeType, setSizeType] = useState<string>('none');
-    const [image, setImage] = useState<File[]>([])
+    const [image, setImage] = useState<string[]>([])
     const [productname, setProductname] = useState<string>("dmdl");
     const [brand, setBrand] = useState<string>("fdf");
     const [description, setDescription] = useState<string>("fdf");
@@ -81,15 +81,15 @@ const AddProduct = ({ setAddproduct }: prop) => {
     const handleImagechange = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files?.[0])
             return alert("image not selected");
-
+         let url=URL.createObjectURL(e.target.files[0])
         if (image.length == 4) {
             let newImages = image.slice(1);
-            return setImage([...newImages, e.target.files[0]])
+            return setImage([...newImages,url])
 
         }
 
 
-        setImage([...image, e.target.files[0]])
+        setImage([...image,url])
     }
 
     const handleCheckboxChange = (value: string) => {
@@ -103,14 +103,15 @@ const AddProduct = ({ setAddproduct }: prop) => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (!category.length) return toast.error('select category');
+        if(image.length<4) return toast.error("4 images required")
         setLoading(true)
         const selectedSizes = check.filter((size) => size.checked == true).map(item => item.label)
         const form = new FormData()
         form.append('name', productname)
-        form.append('file', image[0] as Blob)
-        form.append('file', image[1] as Blob)
-        form.append('file', image[2] as Blob)
-        form.append('file', image[3] as Blob)
+        form.append('file', image[0])
+        form.append('file', image[1])
+        form.append('file', image[2])
+        form.append('file', image[3])
         form.append('description', description)
         form.append('brand', brand)
         form.append('price', price),
@@ -217,14 +218,14 @@ const AddProduct = ({ setAddproduct }: prop) => {
                             <div className="w-full relative h-full bg-slate-200 grid  flex-col justify-center place-items-center place-content-center text-5xl">
                                 {
                                     image.length >= 1 ? (
-                                        <img width={'100%'} height={'100%'} alt='nonn' src={URL.createObjectURL(image[0])} />
+                                        <img width={'100%'} height={'100%'} alt='nonn' src={image[0]} />
                                     ) :
                                         <>
                                             <UploadIcon />
                                             <p className="text-blue-400 text-sm">click to upload</p>
                                         </>
                                 }
-                                <input required onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
+                                <input  onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
                             </div>
                         </div>
                         <div className="h-52 relative rounded overflow-hidden">
@@ -232,7 +233,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
                                 {
                                     image.length >= 2 ? (
                                         // <></>
-                                        <img width={'100%'} height={'100%'} alt='nonn' src={URL.createObjectURL(image[1])} />
+                                        <img width={'100%'} height={'100%'} alt='nonn' src={image[1]} />
 
                                         // <Image fill alt='nonn' src={URL.createObjectURL(image[1])} />
                                     ) :
@@ -241,7 +242,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
                                             <p className="text-blue-400 text-sm">click to upload</p>
                                         </>
                                 }
-                                <input required onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
+                                <input  onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
                             </div>
                         </div>
                         <div className="h-52 relative rounded overflow-hidden">
@@ -249,7 +250,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
                                 {
                                     image.length >= 3 ? (
                                         // <></>
-                                        <img width={'100%'} height={'100%'} alt='nonn' src={URL.createObjectURL(image[2])} />
+                                        <img width={'100%'} height={'100%'} alt='nonn' src={image[2]} />
 
                                         // <Image fill alt='nonn' src={URL.createObjectURL(image[2])} />
                                     ) :
@@ -258,21 +259,21 @@ const AddProduct = ({ setAddproduct }: prop) => {
                                             <p className="text-blue-400 text-sm">click to upload</p>
                                         </>
                                 }
-                                <input required onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
+                                <input  onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
                             </div>
                         </div>
                         <div className="h-52 relative rounded overflow-hidden">
                             <div className="w-full relative h-full bg-slate-200 grid  flex-col justify-center place-items-center place-content-center text-5xl">
                                 {
                                     image.length >= 4 ? (
-                                        <img width={'100%'} height={'100%'} alt='nonn' src={URL.createObjectURL(image[3])} />
+                                        <img width={'100%'} height={'100%'} alt='nonn' src={image[3]} />
                                     ) :
                                         <>
                                             <UploadIcon />
                                             <p className="text-blue-400 text-sm">click to upload</p>
                                         </>
                                 }
-                                <input required onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
+                                <input  onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
                             </div>
                         </div>
 
