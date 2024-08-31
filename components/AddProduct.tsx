@@ -33,6 +33,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
     const [size, setSize] = useState<string>();
     const [sizeType, setSizeType] = useState<string>('none');
     const [image, setImage] = useState<string[]>([])
+    const [imageFile, setImageFile] = useState<File[]>([])
     const [productname, setProductname] = useState<string>("dmdl");
     const [brand, setBrand] = useState<string>("fdf");
     const [description, setDescription] = useState<string>("fdf");
@@ -83,13 +84,15 @@ const AddProduct = ({ setAddproduct }: prop) => {
             return alert("image not selected");
          let url=URL.createObjectURL(e.target.files[0])
         if (image.length == 4) {
-            let newImages = image.slice(1);
-            return setImage([...newImages,url])
-
+            console.log('full imag');
+             let newImages = image.slice(1);
+             setImage([...newImages,url])
+            let newImageFile=imageFile.slice(1);
+            setImageFile([...newImageFile,e.target.files[0]])
+            return;
         }
-
-
-        setImage([...image,url])
+        setImage([...image,url]);
+        setImageFile([...imageFile,e.target.files[0]])
     }
 
     const handleCheckboxChange = (value: string) => {
@@ -108,10 +111,10 @@ const AddProduct = ({ setAddproduct }: prop) => {
         const selectedSizes = check.filter((size) => size.checked == true).map(item => item.label)
         const form = new FormData()
         form.append('name', productname)
-        form.append('file', image[0])
-        form.append('file', image[1])
-        form.append('file', image[2])
-        form.append('file', image[3])
+        form.append('file', imageFile[0])
+        form.append('file', imageFile[1])
+        form.append('file', imageFile[2])
+        form.append('file', imageFile[3])
         form.append('description', description)
         form.append('brand', brand)
         form.append('price', price),
@@ -129,6 +132,8 @@ const AddProduct = ({ setAddproduct }: prop) => {
             ApiErrorResponse(error)
         })
     }
+    console.log(image);
+    
     if(loading) return(<Loading/>)
     return (
 
