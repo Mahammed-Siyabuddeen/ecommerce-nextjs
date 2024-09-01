@@ -48,9 +48,9 @@ const Signup = () => {
 
 
     return (
-        <form method='post' onSubmit={(e: FormEvent) => handlesubmit(e)} className="container ml-auto mr-auto w-3/6 my-12 flex flex-col gap-4">
+        <form method='post' onSubmit={(e: FormEvent) => handlesubmit(e)} className="container ml-auto mr-auto w-5/6 md:w-3/6 my-12 flex flex-col gap-4">
             <div>
-                <h1 className='text-3xl font-semibold'>Signup</h1>
+                <h1 className=' text-3xl font-semibold'>Signup</h1>
             </div>
 
             <div className='shadow-sm flex justify-center py-4'>
@@ -59,19 +59,19 @@ const Signup = () => {
 
             <div className='text-center text-slate-400'>or Signup with Email</div>
 
-            <div className=" font-medium gap-1 flex  shadow-sm  w-fll">
+            <div className=" font-medium gap-1 flex flex-col md:flex-row   shadow-sm  w-fll">
                 <div className='basis-2/4 flex flex-col gap-1 '>
                     <label htmlFor="">First Name</label>
                     <input required value={first_name} onChange={(e: ChangeEvent<HTMLInputElement>) => setfname(e.target.value)} placeholder='enter first name' name='first_name' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && first_name.length < 1 ? 'border-red-500' : ''}`} />
 
                 </div>
-                <div className='basis-2/4 flex flex-col gap-1'>
+                <div className='basis-2/4 flex  flex-col gap-1'>
                     <label htmlFor="">Last name</label>
                     <input required value={last_name} onChange={(e: ChangeEvent<HTMLInputElement>) => setlname(e.target.value)} placeholder='enter last name' name='last_name' type="text" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && last_name.length < 1 ? 'border-red-500' : ''}`} />
 
                 </div>
             </div>
-            <div className=" font-medium gap-1 flex shadow-sm w-full">
+            <div className=" font-medium gap-1 flex flex-col md:flex-row shadow-sm w-full">
                 <div className='basis-2/4 flex flex-col gap-1'>
                     <label htmlFor="">phone_number</label>
                     <input required value={phone_number} onChange={(e: ChangeEvent<HTMLInputElement>) => setphone(e.target.value)} pattern="[7-9]{1}[0-9]{4}[0-9]{5}" placeholder='enter your number' name='phone_number' type="tel" className={`w-full outline-none  border rounded-md p-3 font-medium ${checkinput && phone_number == undefined ? 'border-red-500' : ''}`} />
@@ -85,7 +85,7 @@ const Signup = () => {
 
             </div>
 
-            <div className=" font-medium gap-1 flex shadow-sm">
+            <div className=" font-medium gap-1 flex flex-col md:flex-row shadow-sm">
                 <div className='basis-2/4 flex flex-col gap-1'>
                     <label htmlFor="">Password</label>
                     <div className={`flex justify-between px-3 items-center border rounded-md p-3 font-medium w-full    `}>

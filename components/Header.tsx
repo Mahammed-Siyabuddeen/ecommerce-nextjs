@@ -25,7 +25,7 @@ const Header = () => {
         })
     },[user,Dispatch])
     return (
-        <div className="container mx-auto flex items-center w-screen p-4">
+        <div className="hidden container mx-auto md:flex items-center w-screen p-4">
             <Link href={'/'} className="basis-1/4">
                 <h1 className="text-3xl font-bold">PAI<span className='text-yellow-400'>RCA</span>RE</h1>
             </Link>

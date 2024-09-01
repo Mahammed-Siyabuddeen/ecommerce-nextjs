@@ -40,7 +40,7 @@ const Login = ({ admin }: { admin: boolean }) => {
 
     }
     return (
-        <form onSubmit={(e: FormEvent) => handleClick(e)} className="container ml-auto mr-auto w-2/6 my-12 flex flex-col gap-4">
+        <form onSubmit={(e: FormEvent) => handleClick(e)} className="container ml-auto mr-auto w-5/6 md:w-2/6 my-12 flex flex-col gap-4">
             <div>
                 <h1 className='text-3xl font-semibold'>{admin ? 'Admin Login' : 'Login'}</h1>
                 <p className='text-sm font-medium'>Hi, Welcome back</p>

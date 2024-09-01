@@ -19,7 +19,7 @@ const WishListItem:FC<prop> = ({item,setWishListItems}) => {
         }).catch((error)=>ApiErrorResponse(error))
     }
     return (
-        <div className="shadow-md w-3/4 mx-auto rounded-lg p-4 flex items-center  justify-between ">
+        <div className="w-full shadow-md md:w-3/4 mx-auto rounded-lg p-4 flex items-center  justify-between ">
             <div className="basis-2/7 relative">
                 <Image width={100} height={100} src={`${item.product.imagesUrl[0]}`} alt='dd' />
             </div>

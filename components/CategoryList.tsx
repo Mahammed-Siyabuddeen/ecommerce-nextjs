@@ -5,8 +5,8 @@ const CategoryList:FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className='font-semibold text-2xl py-2'>Our Top Categories</h1>
-      <div className=" flex text-2xl justify-evenly">
+      <h1 className='font-semibold text-xl md:text-2xl py-2'>Our Top Categories</h1>
+      <div className=" flex w-full overflow-x-scroll whitespace-nowrap gap-2 text-2xl justify-evenly">
      <Category name='books'/>
      <Category name='electronics'/>
      <Category name='furniture'/>

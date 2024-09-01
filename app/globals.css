@@ -13,10 +13,6 @@
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         
     }
-    .service_div h2 {
-        @apply font-semibold uppercase text-xl;
-    }
-
     .animation_circle {
         stroke-dasharray: 1194;
         stroke-dashoffset: 1194;

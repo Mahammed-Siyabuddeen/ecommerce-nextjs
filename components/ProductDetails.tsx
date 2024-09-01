@@ -56,8 +56,8 @@ const ProductDetails = ({ productdetials }: { productdetials: productType }) => 
 
   return (
     <div className='container  p-3 mx-auto'>
-      <div className=" flex items-center  ">
-        <div className="basis-2/4  p-4 h-dvh relative">
+      <div className="flex flex-col md:flex-row items-center  ">
+        <div className="basis-2/4  p-4 h-96 w-full md:h-dvh relative">
           <ProductDetailsImageSection ImagesUrls={productdetials.imagesUrl} />
         </div>
         <div className="basis-2/4 flex flex-col gap-4 px-6 ">
@@ -75,7 +75,7 @@ const ProductDetails = ({ productdetials }: { productdetials: productType }) => 
               ))
             }
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 pb-5">
             <button onClick={handleBuyNow} className="px-5 py-3 max-w-fit font-medium gap-2 text-center inline-flex items-center text-gray-950 bg-yellow-400 rounded-lg hover:bg-yellow-500  ">
               <ShopIcon />  Buy Now
             </button>

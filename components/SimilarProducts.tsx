@@ -18,7 +18,7 @@ const SimilarProducts:FC<prop> = ({category_id,product_id}) => {
   if(!products.length) return<></>
   return (
     <div className=''>
-      <h1 className=" font-semibold text-2xl py-2">Related Products</h1>
+      <h1 className=" font-semibold text-xl md:text-2xl py-2">Related Products</h1>
       <div className="grid  gap-5 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
         {
           products.map((item:productType)=>(

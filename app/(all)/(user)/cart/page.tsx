@@ -29,10 +29,10 @@ const Page: FC = () => {
     <div className="">
       <div className="container mx-auto">
         <h1 className='text-3xl font-bold text-center my-14'>Cart</h1>
-        <div className="flex mx-auto w-4/5 justify-between">
-          <div className=" flex flex-col m-3 mr-6   w-4/5">
+        <div className="md:flex mx-auto w-4/5 justify-between">
+          <div className=" flex flex-col md:m-3 md:mr-6   md:w-4/5">
 
-            <div className="flex justify-between p-5">
+            <div className="hidden md:flex justify-between p-5">
               <p className='font-medium w-3/6 items-center text-center'>product Details</p>
               <p className='font-medium w-1/6 items-center text-center'>quantity </p>
               <p className='font-medium w-1/6 items-center text-center'>Price</p>
@@ -46,7 +46,7 @@ const Page: FC = () => {
               ))
             }
           </div>
-          <div className="w-1/5  ">
+          <div className="w-full mb-10 md:w-1/5  ">
             <CartTotal />
           </div>
         </div>

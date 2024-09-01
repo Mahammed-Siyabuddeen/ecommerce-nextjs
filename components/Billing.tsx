@@ -50,7 +50,7 @@ const Billing = () => {
             clientSecret,
             elements,
             confirmParams: {
-                return_url: `${process.env.NEXT_PUBLIC_BACKEND_URL as string}/successpayment`,
+                return_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL as string}/successpayment`,
             },
 
         })
@@ -59,21 +59,13 @@ const Billing = () => {
     if (!clientSecret || !elements || !stripe || checkout.total_amount === 0) return <>loading</>
     return (
         <div className="container mx-auto ">
-            <div className="container ml-auto mr-auto w-2/6 my-12 flex flex-col gap-4 py-4 px-2 rounded-md   bg-yellow-400">
+            <div className="container ml-auto mr-auto w-5/6 md:w-2/6 my-12 flex flex-col gap-4 py-4 px-2 rounded-md   bg-yellow-400">
                 <div>
                     <h1 className='text-3xl font-semibold'>Billing</h1>
                     <div className="flex justify-between p-3">
                         <p className='text-sm font-medium'>total : </p>
                         <p className='text-sm font-medium'>{checkout.total_amount} </p>
                     </div>
-                </div>
-                <div className="relative  justify-start gap-1 p-3 border rounded-md  font-medium flex items-center  shadow-sm">
-                    <input type="radio" name='method' className='  outline-none   ' />
-                    <label htmlFor="">COD</label>
-                </div>
-                <div className="relative  justify-start gap-1 p-3 border rounded-md  font-medium flex items-center  shadow-sm">
-                    <input type="radio" name='method' className='  outline-none   ' />
-                    <label htmlFor="">Online Payment</label>
                 </div>
                 <form onSubmit={handleSubmit} className='w-full '>
                     {

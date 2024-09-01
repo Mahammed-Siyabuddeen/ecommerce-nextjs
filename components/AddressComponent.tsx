@@ -27,8 +27,8 @@ const AddressComponent: FC = () => {
     return (
         <form onSubmit={(e: FormEvent) => handlecheckout(e)} className="container mx-auto">
             <h1 className="text-center font-bold text-xl my-5">Check out</h1>
-            <div className="flex mx-auto w-4/5 justify-between">
-                <div className=" flex flex-col m-3 mr-6   w-3/5">
+            <div className="flex flex-col md:flex-row  mx-auto w-4/5 justify-between">
+                <div className=" flex flex-col m-3 md:mr-6  w-full  md:w-3/5">
                     <div className="flex flex-col gap-1 my-2">
                         <label htmlFor="">name</label>
                         <input required value={name} onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)} type="text" name='name' className="w-full p-3 border outline-none " />
@@ -58,7 +58,7 @@ const AddressComponent: FC = () => {
                         <input required value={phone} onChange={(e: ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)} type="tel" name='phone' className="w-full p-3 border outline-none " />
                     </div>
                 </div>
-                <div className="w-2/5  ">
+                <div className="w-full mb-10 md:w-2/5  ">
                     <CartTotal />
                 </div>
             </div>

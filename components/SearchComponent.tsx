@@ -68,7 +68,7 @@ const Search = () => {
     }
     return (
         <div className="container mx-auto flex gap-4 h-full w-full my-12">
-            <div className="basis-1/5 bg-gray-100  rounded flex flex-col  ">
+            <div className="hidden basis-1/5 bg-gray-100  rounded md:flex flex-col  ">
                 <div className="w-full p-4 flex justify-between">
                     <h1 className="font-medium">Filter</h1>
                     <button className='text-yellow-500' onClick={clearFilter}>Clear All</button>
@@ -79,7 +79,7 @@ const Search = () => {
                 <BrandFilter brand={brand} setBrand={setBrand} />
 
             </div>
-            <div className="basis-4/5 bg-gray-100 flex flex-col  gap-4 rounded p-4">
+            <div className="flex-1 md:basis-4/5  bg-gray-100 flex flex-col  gap-4 rounded p-4">
                 <>
                     {/* each order */}
                     {

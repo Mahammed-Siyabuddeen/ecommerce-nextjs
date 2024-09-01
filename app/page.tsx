@@ -8,10 +8,12 @@ import Services from "../components/Services";
 import PopularProduct from "@/components/PopularProducts";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
+import MobileNavbar from "@/components/MobileNavbar";
 export default function Home() {
   return (
     <div>
       <Header/>
+      <MobileNavbar/>
       {/* <Navigation/> */}
       <HeroSection/>
       <CategoryList/>

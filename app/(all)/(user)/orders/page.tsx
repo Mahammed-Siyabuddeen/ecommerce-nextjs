@@ -25,8 +25,8 @@ const PageComponent = () => {
         return item.status === filter;
     })
     return (
-        <div className="container mx-auto flex gap-4 h-full w-full my-12">
-            <div className="basis-1/5 bg-gray-100 rounded">
+        <div className="container justify-center mx-auto flex gap-4 h-full w-full my-12">
+            <div className="hidden md:block basis-1/5 bg-gray-100 rounded">
                 <OrderFilters />
             </div>
             <div className="basis-4/5 bg-gray-100 flex flex-col  gap-4 rounded p-4">

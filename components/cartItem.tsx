@@ -12,33 +12,33 @@ import { usePathname, useRouter } from 'next/navigation'
 
 const CartItem = ({ items }: { items: cartType }) => {
     const dispatch = useDispatch<AppDispatch>()
-    const {Count}=useSelector((state:RootState)=>state.cart)
+    const { Count } = useSelector((state: RootState) => state.cart)
     const pathname = usePathname()
     const router = useRouter()
 
 
     const handlequantitychange = (value: number) => {
         if (pathname !== '/cart') router.push('/cart')
-        if(items.stock_quantity<items.quantity+value) return toast.error("That much stock is not available.")
+        if (items.stock_quantity < items.quantity + value) return toast.error("That much stock is not available.")
         dispatch(setQuantity([value, items.cartItem_id]))
         changeCartItemsQuantity({ quantity: value, cartItem_id: items.cartItem_id })
-        .then(({ data }) => {
-        }).catch((error) => ApiErrorResponse(error));
+            .then(({ data }) => {
+            }).catch((error) => ApiErrorResponse(error));
 
     }
     const handleRemoveFromCart = (cartItemId: string) => {
         if (pathname !== '/cart') router.push('/cart')
         if (!window.confirm(`are you sure want to delete ${items.name}`)) return;
-        dispatch(setCartCount(Count-1))
+        dispatch(setCartCount(Count - 1))
         removeFromCart(cartItemId).then(({ data }) => {
             toast('successfully removed');
             dispatch(removeitem(cartItemId))
         }).catch((error) => ApiErrorResponse(error))
     }
     return (
-        <div className="flex items-center border rounded-md  p-5 my-3">
-            <div className="w-3/6 grow flex ">
-                <div className="relative w-2/4 h-20 m-1 ">
+        <div className="flex flex-col md:flex-row items-center border rounded-md  p-5 my-3">
+            <div className="w-full md:w-3/6 grow flex ">
+                <div className="relative w-full md:w-2/4 h-20 m-1 ">
                     <Image src={items.imagesUrl[0]} fill alt='' />
                 </div>
                 <div className="flex flex-col item-center gap-1">
@@ -52,9 +52,15 @@ const CartItem = ({ items }: { items: cartType }) => {
                 <div className="text-sm font-medium p-2 px-4  border ">{items.quantity}</div>
                 <div onClick={() => handlequantitychange(1)} className="text-2xl font-bold cursor-pointer px-2">+</div>
             </div>
-            <div className="w-1/6 text-center">&#8377;{items.price}</div>
-            <div className="w-1/6 text-center">&#8377;{items.total}</div>
-            <div onClick={() => handleRemoveFromCart(items.cartItem_id)} className="w-1/6 flex justify-center cursor-pointer text-xl font-bold text-red-500"><MultiplyIcon /></div>
+
+            <div className="hidden md:block w-1/6 text-center">&#8377;{items.price}</div>
+            <div className="hidden md:block  w-1/6 text-center">&#8377;{items.total}</div>
+            <div onClick={() => handleRemoveFromCart(items.cartItem_id)} className="hidden md:flex w-1/6  justify-center cursor-pointer text-xl font-bold text-red-500"><MultiplyIcon /></div>
+            <div className="md:hidden w-full flex justify-between">
+                <div className="w-1/6 text-center">&#8377;{items.price}</div>
+                <div className="w-1/6 text-center">&#8377;{items.total}</div>
+                <div onClick={() => handleRemoveFromCart(items.cartItem_id)} className="w-1/6 flex justify-center cursor-pointer text-xl font-bold text-red-500"><MultiplyIcon /></div>
+            </div>
         </div>
     )
 }

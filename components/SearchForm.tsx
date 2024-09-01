@@ -27,7 +27,7 @@ const SearchForm = () => {
    
 
     return (
-        <form onSubmit={handleSubmit} className="flex w-4/5 border rounded-md overflow-hidden ">
+        <form onSubmit={handleSubmit} className="flex w-full md:w-4/5 border rounded-md overflow-hidden ">
             <input value={searchQuery}
                 onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
                 type="text" className="w-7/12 border-r outline-none" />

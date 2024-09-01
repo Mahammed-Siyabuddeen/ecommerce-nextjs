@@ -24,7 +24,7 @@ const Category =({ name }: { name: string }) => {
         })
     },[])
     return (
-        <Link href={`/search?category=${data._id}`} className="flex flex-col gap-3 items-center w-24 bg-slate-200 rounded-full h-24 justify-center">
+        <Link href={`/search?category=${data._id}`} className=" flex-none flex flex-col gap-3 items-center w-24 bg-slate-200 rounded-full h-24 justify-center">
             {
                 name=="books"?<BooksIcon />
                 :name=="electronics"?<ElectronicsIcon/>
