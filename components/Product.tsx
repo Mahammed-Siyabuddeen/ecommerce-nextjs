@@ -30,7 +30,7 @@ const Product = ({ productinfo }: { productinfo: productType }) => {
     <div className="p-3 rounded-sm">
       <div className={`h-52 md:h-64  relative ${pathname == "/search" ? 'bg-white' : 'bg-slate-200'}`}>
         <Image fill className='object-cover ' src={productinfo.imagesUrl[0]} alt="" />
-        <FavIcon onClick={handleAddtoWishList} className='absolute cursor-pointer z-50 text-2xl right-2 top-2' />
+        <FavIcon onClick={handleAddtoWishList} className='absolute cursor-pointer z-40 text-2xl right-2 top-2' />
       </div>
       <Link href={`/productdetails/${productinfo._id}`} className='flex flex-col gap-1'>
         <h3 className='font-semibold pt-2'>{productinfo.name}</h3>
