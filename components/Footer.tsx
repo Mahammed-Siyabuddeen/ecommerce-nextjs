@@ -4,7 +4,7 @@ import { LinkedInIcon } from './Icons/LinkedInIcon'
 
 const Footer = () => {
     return (
-        <div className="p-10 bg-yellow-400 text-slate-950">
+        <div className="p-10 bg-yellow-400 text-slate-950 mt-auto">
             <div className="w-full flex items-center gap-12 md:gap-2 md:items-start flex-col md:flex-row pb-2">
                 <div className="flex-1">
                     <Link href={'/'} className="basis-1/4">
