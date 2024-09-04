@@ -29,7 +29,7 @@ const PageComponent = () => {
             <div className="hidden md:block basis-1/5 bg-gray-100 rounded">
                 <OrderFilters />
             </div>
-            <div className="basis-4/5 bg-gray-100 flex flex-col  gap-4 rounded p-4">
+            <div className=" basis-5/6 md:basis-4/5 bg-gray-100 flex flex-col  gap-4 rounded p-2 md:p-4">
                 <>
                     {/* each order */}
                     {
