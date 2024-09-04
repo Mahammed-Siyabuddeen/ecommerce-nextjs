@@ -7,8 +7,8 @@ import Link from 'next/link'
 const Order = ({ orderdata }: { orderdata: orderDetailsType }) => {
     return (
         <Link href={`/order_details/${orderdata._id}/${orderdata.orderItemId}`}>
-        <div className="flex items-center w-full bg-white px-4">
-            <div className="w-2/4 flex gap-4 items-center">
+        <div className="flex flex-col md:flex-row items-center w-full bg-white px-4">
+            <div className="w-full md:w-24 flex gap-4 items-center">
                 <div className="relative w-24 h-24 m-3">
                     <Image fill src={orderdata.productImage[0]} alt='' />
                 </div>

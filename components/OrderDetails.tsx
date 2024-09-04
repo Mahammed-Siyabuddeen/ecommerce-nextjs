@@ -52,10 +52,10 @@ const OrderDetails = ({ order_id, orderitem_id }: prop) => {
   return (
     <div className="container mx-auto rounded flex flex-col gap-4">
       <OrderAddress data={data} address={data.address} />
-      <div className="flex justify-evenly items-center bg-gray-100 rounded">
+      <div className="flex flex-col md:flex-row justify-evenly md:items-center bg-gray-100 rounded">
         <Link href={`/productdetails/${data.product_id}`} className="basis-1/4 flex items-center">
-          <div className="relative w-24 h-24 m-3">
-            <Image fill src={data.productImage[0]} alt='' />
+          <div className="relative w-32 h-24 m-3 ">
+            <Image className='object-cover' fill src={data.productImage[0]} alt='' />
           </div>
           <p>{data.productName}</p>
         </Link>
@@ -66,8 +66,8 @@ const OrderDetails = ({ order_id, orderitem_id }: prop) => {
           openReviewComponent && data.status == 'delivered' ?
             <AddReview setOpenReviewComponent={setOpenReviewComponent} orderitem_id={orderitem_id} />
             : <div className='flex flex-col gap-2'>
-              <button disabled={(data.status == "canceled"||data.status == "delivered") ? true : false} onClick={handleCancelOrder} className="px-4 py-2 w-fit text-white rounded-lg bg-red-600 hover:bg-red-700 disabled:bg-red-400">cancel</button>
-              <div onClick={() => setOpenReviewComponent(true)} className="basis-1/4 cursor-pointer   flex items-center gap-2">
+              <button disabled={(data.status == "canceled"||data.status == "delivered") ? true : false} onClick={handleCancelOrder} className="px-4 m-4 py-2 w-fit text-white rounded-lg bg-red-600 hover:bg-red-700 disabled:bg-red-400">cancel</button>
+              <div onClick={() => setOpenReviewComponent(true)} className="basis-1/4 m-4 cursor-pointer   flex items-center gap-2">
                 <StarIcon />
                 <p>Rate and Review Product</p>
               </div>
