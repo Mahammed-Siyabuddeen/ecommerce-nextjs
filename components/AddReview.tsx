@@ -1,5 +1,5 @@
 'useclient';
-import React, { ChangeEvent, ChangeEventHandler, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { OutlineStarIcon, StarIcon } from './Icons/StarIcon';
 import { toast } from 'sonner';
 import { useSelector } from 'react-redux';

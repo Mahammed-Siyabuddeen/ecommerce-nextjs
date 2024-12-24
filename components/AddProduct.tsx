@@ -1,12 +1,8 @@
 'use client'
 import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react'
-import Image from 'next/image';
 import CatergoySelect from './CatergoySelect';
 import ShoesCategorys from './ShoesCategorys';
 import ClothesSize from './ClothesSize';
-import { UploadIcon } from './Icons/Upload';
-import { fecthData } from '@/Services/fecthData';
-import axios from 'axios';
 import { getAllCategory } from '@/Services/category.service';
 import { categoryType } from './Types/categoryType';
 import { addProduct } from '@/Services/addProduct.services';
@@ -16,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/features/redux/store';
 import { appendToAllProducts } from '@/features/allProductsSlice';
 import Loading from './Loading';
+import PrevUploadedImage from './PrevUploadedImage';
 
 interface checkboxData {
     label: string,
@@ -26,11 +23,10 @@ interface prop {
 }
 
 const AddProduct = ({ setAddproduct }: prop) => {
-    const Dispatch = useDispatch<AppDispatch>()
-    const[loading,setLoading]=useState(false);
+    const dispatch = useDispatch<AppDispatch>()
+    const [loading, setLoading] = useState(false);
     const [category, setCategory] = useState<string>('');
     const [categoryList, setCategoryList] = useState<categoryType[]>([])
-    const [size, setSize] = useState<string>();
     const [sizeType, setSizeType] = useState<string>('none');
     const [image, setImage] = useState<string[]>([])
     const [imageFile, setImageFile] = useState<File[]>([])
@@ -72,28 +68,12 @@ const AddProduct = ({ setAddproduct }: prop) => {
         ])
 
     }, [category])
+
     useEffect(() => {
         getAllCategory().then(({ data }: { data: categoryType[] }) => {
             setCategoryList(data)
-
         })
     }, [])
-
-    const handleImagechange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files?.[0])
-            return alert("image not selected");
-         let url=URL.createObjectURL(e.target.files[0])
-        if (image.length == 4) {
-            console.log('full imag');
-             let newImages = image.slice(1);
-             setImage([...newImages,url])
-            let newImageFile=imageFile.slice(1);
-            setImageFile([...newImageFile,e.target.files[0]])
-            return;
-        }
-        setImage([...image,url]);
-        setImageFile([...imageFile,e.target.files[0]])
-    }
 
     const handleCheckboxChange = (value: string) => {
         setcheck(prevstate =>
@@ -106,7 +86,7 @@ const AddProduct = ({ setAddproduct }: prop) => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (!category.length) return toast.error('select category');
-        if(image.length<4) return toast.error("4 images required")
+        if (image.length < 4) return toast.error("4 images required")
         setLoading(true)
         const selectedSizes = check.filter((size) => size.checked == true).map(item => item.label)
         const form = new FormData()
@@ -118,13 +98,13 @@ const AddProduct = ({ setAddproduct }: prop) => {
         form.append('description', description)
         form.append('brand', brand)
         form.append('price', price),
-            form.append('mrp', mrp),
-            form.append('stock_quantity', stock_quantity),
-            form.append('category_id', category)
+        form.append('mrp', mrp),
+        form.append('stock_quantity', stock_quantity),
+        form.append('category_id', category)
         form.append('sizes', JSON.stringify(selectedSizes))
 
         addProduct(form).then(({ data }) => {
-            Dispatch(appendToAllProducts({ ...data, orderQuantity: 0, totalSale: 0 }))
+            dispatch(appendToAllProducts({ ...data, orderQuantity: 0, totalSale: 0 }))
             setLoading(false)
             toast.success('successfully product added')
         }).catch((error) => {
@@ -132,9 +112,8 @@ const AddProduct = ({ setAddproduct }: prop) => {
             ApiErrorResponse(error)
         })
     }
-    console.log(image);
-    
-    if(loading) return(<Loading/>)
+
+    if (loading) return (<Loading />)
     return (
 
         <form onSubmit={handleSubmit} className="w-full bg-sky-50 overflow-y-scroll">
@@ -218,72 +197,12 @@ const AddProduct = ({ setAddproduct }: prop) => {
                 </div>
                 <div className="w-full p-2 bg-white rounded">
                     <div className="grid grid-cols-2 gap-4  ">
-
-                        <div className="h-52 relative rounded overflow-hidden">
-                            <div className="w-full relative h-full bg-slate-200 grid  flex-col justify-center place-items-center place-content-center text-5xl">
-                                {
-                                    image.length >= 1 ? (
-                                        <img width={'100%'} height={'100%'} alt='nonn' src={image[0]} />
-                                    ) :
-                                        <>
-                                            <UploadIcon />
-                                            <p className="text-blue-400 text-sm">click to upload</p>
-                                        </>
-                                }
-                                <input  onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
-                            </div>
-                        </div>
-                        <div className="h-52 relative rounded overflow-hidden">
-                            <div className="w-full relative h-full bg-slate-200 grid  flex-col justify-center place-items-center place-content-center text-5xl">
-                                {
-                                    image.length >= 2 ? (
-                                        // <></>
-                                        <img width={'100%'} height={'100%'} alt='nonn' src={image[1]} />
-
-                                        // <Image fill alt='nonn' src={URL.createObjectURL(image[1])} />
-                                    ) :
-                                        <>
-                                            <UploadIcon />
-                                            <p className="text-blue-400 text-sm">click to upload</p>
-                                        </>
-                                }
-                                <input  onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
-                            </div>
-                        </div>
-                        <div className="h-52 relative rounded overflow-hidden">
-                            <div className="w-full relative h-full bg-slate-200 grid  flex-col justify-center place-items-center place-content-center text-5xl">
-                                {
-                                    image.length >= 3 ? (
-                                        // <></>
-                                        <img width={'100%'} height={'100%'} alt='nonn' src={image[2]} />
-
-                                        // <Image fill alt='nonn' src={URL.createObjectURL(image[2])} />
-                                    ) :
-                                        <>
-                                            <UploadIcon />
-                                            <p className="text-blue-400 text-sm">click to upload</p>
-                                        </>
-                                }
-                                <input  onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
-                            </div>
-                        </div>
-                        <div className="h-52 relative rounded overflow-hidden">
-                            <div className="w-full relative h-full bg-slate-200 grid  flex-col justify-center place-items-center place-content-center text-5xl">
-                                {
-                                    image.length >= 4 ? (
-                                        <img width={'100%'} height={'100%'} alt='nonn' src={image[3]} />
-                                    ) :
-                                        <>
-                                            <UploadIcon />
-                                            <p className="text-blue-400 text-sm">click to upload</p>
-                                        </>
-                                }
-                                <input  onChange={(e: ChangeEvent<HTMLInputElement>) => handleImagechange(e)} type='file' className='w-ful absolute opacity-0 h-full' />
-                            </div>
-                        </div>
-
+                        <PrevUploadedImage
+                            imagePosition={1} image={image} imageFile={imageFile}
+                            setImage={setImage} setImageFile={setImageFile}
+                        />
                     </div>
-                    <button disabled={loading?true:false} type='submit' className="p-3 px-6 text-slate-950 bg-yellow-400 m-3 rounded disabled:bg-yellow-200">Sumbit</button>
+                    <button disabled={loading ? true : false} type='submit' className="p-3 px-6 text-slate-950 bg-yellow-400 m-3 rounded disabled:bg-yellow-200">Sumbit</button>
                 </div>
             </div>
         </form>

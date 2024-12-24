@@ -1,4 +1,3 @@
-import { getAllProductsapi } from "@/Services/products.services";
 import { productType } from "@/components/Types/productType";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 

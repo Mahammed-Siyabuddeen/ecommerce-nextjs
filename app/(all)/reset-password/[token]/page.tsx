@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 import { setUser } from '@/features/authSlice'
 const PageComponent = () => {
     const params = useParams()
-    const Dispatch=useDispatch()
+    const dispatch=useDispatch()
     const router=useRouter()
     const [isOpen, setIsOpne] = useState<boolean>(false);
     const [issOpenRPasword, setIssOpenRPasword] = useState<boolean>(false);
@@ -24,7 +24,7 @@ const PageComponent = () => {
         resetPaaswordApi({password,token:params.token as string})
         .then(({data})=>{
             toast("success password changed");
-            Dispatch(setUser(data));
+            dispatch(setUser(data));
             router.push('/')
         })
         .catch((error)=>ApiErrorResponse(error))

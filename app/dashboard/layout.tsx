@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isvalidtoken, setValidToken] = useState<boolean | null>(null)
   const router = useRouter();
-  const Dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     try {
@@ -20,14 +20,14 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
       if (!admin) throw new Error("login")
       const decoded = jwtDecode(admin.token);
       if ((decoded.exp as number) * 1000 < new Date().getTime()) {
-        Dispatch(clearAdmin());
+        dispatch(clearAdmin());
         throw new Error("login");
       }
       setValidToken(true)
     } catch (error) {
       router.push('/admin-auth')
     }
-  },[Dispatch,router])
+  },[dispatch,router])
 
   if (isvalidtoken == null) return <Loading />
   return (

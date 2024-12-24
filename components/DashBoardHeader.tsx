@@ -11,21 +11,21 @@ import { setTotalCustomers, setTotalOrders, setTotalProducts, setTotalSales } fr
 
 const DashBoardHeader = () => {
     const dashboard = useSelector((state: RootState) => state.dashboard);
-    const Dispatch = useDispatch()
+    const dispatch = useDispatch()
     useEffect(() => {
         async function get() {
 
             try {
                 const data = await Promise.all([getTotalSales(), getTotalProducts(), getTotalOrders(), getTotalCustomers()]);
-                Dispatch(setTotalSales(data[0].data as number))
-                Dispatch(setTotalProducts(data[1].data as number))
-                Dispatch(setTotalOrders(data[2].data as number))
-                Dispatch(setTotalCustomers(data[3].data as number))
+                dispatch(setTotalSales(data[0].data as number))
+                dispatch(setTotalProducts(data[1].data as number))
+                dispatch(setTotalOrders(data[2].data as number))
+                dispatch(setTotalCustomers(data[3].data as number))
             } catch (error) {
             }
         }
         get();
-    }, [Dispatch])
+    }, [dispatch])
     return (
         <>
             <div className="p-8 items-center w-40 justify-evenly box_shadow  flex flex-col bg-white rounded ">

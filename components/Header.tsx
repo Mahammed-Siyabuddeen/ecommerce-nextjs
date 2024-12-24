@@ -1,29 +1,29 @@
 'use client';
 import React, { useEffect } from 'react'
-import { Arrowdown } from './Icons/Arrowdown'
-import { SearchIcon } from './Icons/SearchIcon'
-import { AccountIcon } from './Icons/AccountIcon'
+import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link'
 import { CartIcon } from './Icons/CartIcon'
 import { FavIcon } from './Icons/FavIcon'
-import Link from 'next/link'
 import AccountLabel from './AccountLabel'
 import SearchForm from './SearchForm'
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '@/features/redux/store';
 import { getCartCount } from '@/Services/category.service';
+import { AppDispatch, RootState } from '@/features/redux/store';
 import { setCartCount } from '@/features/cartSlice';
+
 const Header = () => {
-    const Dispatch=useDispatch<AppDispatch>()
+    const dispatch=useDispatch<AppDispatch>()
     const user=useSelector((state:RootState)=>state.user)
     const {Count} = useSelector((state: RootState) => state.cart)
+
     useEffect(()=>{
         if(!user || !user._id)return;
         getCartCount({user_id:user._id}).then(({data})=>{
-            Dispatch(setCartCount(data))
+            dispatch(setCartCount(data))
         }
         ).catch((error)=>{console.log(error);
         })
-    },[user,Dispatch])
+    },[user,dispatch])
+    
     return (
         <div className="hidden container mx-auto md:flex items-center w-screen p-4">
             <Link href={'/'} className="basis-1/4">

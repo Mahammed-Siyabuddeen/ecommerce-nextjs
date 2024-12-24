@@ -39,6 +39,7 @@ const MobileNavbar = () => {
             },
         }
     }
+    
     const handleAccountInfoClick = () => {
         setOpen(false);
         setIsPopupOpen(true);

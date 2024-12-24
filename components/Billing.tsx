@@ -41,6 +41,7 @@ const Billing = () => {
 
         const { error: sumbitError } = await elements.submit();
         if (sumbitError) {
+            console.log(sumbitError);
             setErrorMessage(sumbitError.message);
             setLoading(false);
             return;
@@ -54,6 +55,8 @@ const Billing = () => {
             },
 
         })
+        console.log(error);
+        
         setLoading(false)
     }
     if (!clientSecret || !elements || !stripe || checkout.total_amount === 0) return <>loading</>

@@ -1,30 +1,41 @@
 'use client'
-import React, { FC, useEffect } from 'react'
-import CartItem from '../../../../components/cartItem'
-import CartTotal from '../../../../components/CartTotal'
-import Header from '../../../../components/Header'
+import React, { FC, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { getcartItems } from '@/Services/cart.service'
 import ApiErrorResponse from '@/Services/ApiErrorResponse'
-import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/features/redux/store'
-import { cartType } from '@/components/Types/cartType'
 import { setCartItems } from '@/features/cartSlice'
+import { cartType } from '@/components/Types/cartType'
+import EmptyCart from '@/components/EmptyCart'
+import Loading from '@/components/Loading'
+import CartItem from '@/components/cartItem'
+import CartTotal from '@/components/CartTotal'
+
 const Page: FC = () => {
   const user = useSelector((state: RootState) => state.user);
-  const {cartitems} = useSelector((state: RootState) => state.cart);
+  const { cartitems } = useSelector((state: RootState) => state.cart);
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch<AppDispatch>();
-
   useEffect(() => {
+
     if (!user._id) return;
-    getcartItems({ user_id: user._id }).then(({ data }: { data: cartType[] }) => {
-      dispatch(setCartItems(data));
-    }).catch((error) => ApiErrorResponse(error))
+
+    getcartItems({ user_id: user._id })
+      .then(({ data }: { data: cartType[] }) => {
+        dispatch(setCartItems(data));
+      })
+      .catch((error) =>
+        ApiErrorResponse(error)
+      )
+      .finally(() =>
+        setLoading(false)
+      );
   }, [dispatch, user])
-  if (!cartitems.length) return (
-    <div className="flex items-center justify-center h-96">
-      <p className="text-center text-2xl font-bold text-slate-500">Empty Cart</p>
-    </div>
-  )
+
+  if (loading) return <Loading />
+
+  if (!cartitems.length) return <EmptyCart />
+
   return (
     <div className="">
       <div className="container mx-auto">

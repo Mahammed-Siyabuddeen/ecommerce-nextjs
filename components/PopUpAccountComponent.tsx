@@ -10,13 +10,13 @@ interface prop{
 }
 const PopUpAccountComponent = ({isOpen,setIsOpen}:prop) => {
     const user = useSelector((state: RootState) => state.user)
-    const Dispatch=useDispatch<AppDispatch>()
+    const dispatch=useDispatch<AppDispatch>()
     const toggleModal = () => {
         setIsOpen(!isOpen);
     };
     const Logout=()=>{
         if(!window.confirm('are sure want to logout')) return;
-        Dispatch(clearUser());
+        dispatch(clearUser());
         window.location.href='/'
     }
     return (

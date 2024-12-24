@@ -33,8 +33,9 @@ const cartSlice=createSlice({
             
         },
         removeitem:(state,action:PayloadAction<string>)=>{
-            state.cartitems.filter((item:cartType)=>item.cartItem_id!=action.payload);
-            return state;
+            state.cartitems=state.cartitems.filter((item:cartType)=>item.cartItem_id!=action.payload);
+            return state
+            
         },
         setCartCount:(state,action:PayloadAction<number>)=>{
             state.Count=action.payload;

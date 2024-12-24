@@ -16,12 +16,12 @@ interface prop {
     currentOrder:allOrderType|undefined
 }
 const PopupOrderDetails: FC<prop> = ({ isOpen, setIsOpen,currentOrder }) => {
-    const Dispatch=useDispatch<AppDispatch>()
+    const dispatch=useDispatch<AppDispatch>()
     if(typeof currentOrder=='undefined') return<></>
 
     const handleStatusChange=(value:string)=>{
         changeOrderStatus({order_id:(currentOrder?._id as string),status:value}).then(({data})=>{
-            Dispatch(setOrderstatus({order_id:currentOrder._id,status:value}))
+            dispatch(setOrderstatus({order_id:currentOrder._id,status:value}))
             toast.success('successfull updated ')
             setIsOpen(false)
             

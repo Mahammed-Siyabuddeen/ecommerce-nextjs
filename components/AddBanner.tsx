@@ -4,10 +4,8 @@ import { UploadIcon } from './Icons/Upload'
 import { addBanner } from '@/Services/banner.services'
 import { toast } from 'sonner'
 import ApiErrorResponse from '@/Services/ApiErrorResponse'
+import Image from 'next/image'
 
-interface prop {
-  setAddbanner: React.Dispatch<React.SetStateAction<boolean>>
-}
 const AddBanner = () => {
   const [heading, setHeading] = useState<string>("");
   const [productId, setProductId] = useState<string>("");
@@ -62,7 +60,9 @@ const AddBanner = () => {
             <div className="w-full relative h-full bg-slate-200 grid  flex-col justify-center place-items-center place-content-center text-5xl">
               {
                 image ? (
-                  <img width={'100%'} height={'100%'} alt='image' src={URL.createObjectURL(image)} />
+                  <div className="w-full h-full">
+                    <Image fill alt='image' src={URL.createObjectURL(image)} />
+                  </div>
                 ) :
                   <>
                     <UploadIcon />

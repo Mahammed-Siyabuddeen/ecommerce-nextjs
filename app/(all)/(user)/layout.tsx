@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 export default function UserLayout({ children }: { children: React.ReactNode }) {
     const [isvalidtoken, setValidToken] = useState<boolean | null>(null)
     const router = useRouter();
-    const Dispatch = useDispatch()
+    const dispatch = useDispatch()
     useEffect(() => {
         function verifytoken() {
             try {
@@ -17,7 +17,7 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
                 if (!user) throw new Error("login");
                 const decoded = jwtDecode(user.token)
                 if ((decoded.exp as number) * 1000 < new Date().getTime()) {
-                    Dispatch(clearUser());
+                    dispatch(clearUser());
                     throw new Error("login");
                 }
                 setValidToken(true);
@@ -26,7 +26,7 @@ export default function UserLayout({ children }: { children: React.ReactNode }) 
             }
         }
         verifytoken()
-    }, [router,Dispatch])
+    }, [router,dispatch])
 
     if (isvalidtoken === null) return <Loading />
     return (

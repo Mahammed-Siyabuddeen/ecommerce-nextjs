@@ -1,6 +1,6 @@
 'use client';
 import { RootState } from '@/features/redux/store';
-import React, { FC, useEffect, useState,  } from 'react'
+import React, { FC,  } from 'react'
 import { useSelector } from 'react-redux';
 import { AccountIcon } from './Icons/AccountIcon';
 import Link from 'next/link';

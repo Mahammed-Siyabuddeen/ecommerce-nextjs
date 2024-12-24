@@ -22,18 +22,18 @@ const Login = ({ admin }: { admin: boolean }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const router = useRouter()
-    const Dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>()
     const user = useSelector((state: RootState) => state.user)
     const handleClick = (e: FormEvent) => {
         e.preventDefault();
         if (admin) {
             adminLoginApi({ email, password }).then(({ data }) => {
-                Dispatch(setAdmin(data))
+                dispatch(setAdmin(data))
                 router.push('/dashboard')
             }).catch(err => ApiErrorResponse(err))
         } else {
             LoginApi({ email, password }).then(({ data }) => {
-                Dispatch(setUser(data))
+                dispatch(setUser(data))
                 router.push('/')
             }).catch(err => ApiErrorResponse(err))
         }

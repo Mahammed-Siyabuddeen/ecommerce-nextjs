@@ -4,10 +4,10 @@ import { AppDispatch } from '@/features/redux/store'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 const OrderFilters = () => {
-    const Dispatch=useDispatch<AppDispatch>()
+    const dispatch=useDispatch<AppDispatch>()
 
     const handleFilters = (value: string) => {
-        Dispatch(filterOrders(value))
+        dispatch(filterOrders(value))
     }
     return (
         <>

@@ -1,6 +1,6 @@
 
 import {SearchComponent } from '@/components/SearchComponent'
-import React, { ChangeEvent, FC, use, useEffect, useState } from 'react'
+import React from 'react'
 
 const PageComponent = () => {
   return(

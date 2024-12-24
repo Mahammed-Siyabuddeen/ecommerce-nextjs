@@ -7,7 +7,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 
 const GoogleLoginComponent = () => {
-    const Dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>()
     const router=useRouter()
     const user = useSelector((state: RootState) => state.user)
 
@@ -20,7 +20,7 @@ const GoogleLoginComponent = () => {
                 data: { clientId: credentialResponse.clientId, credential: credentialResponse.credential }
             }
         ).then(({data})=>{
-                Dispatch(setUser({...data}));
+            dispatch(setUser({...data}));
                 router.push('/');
                 
         }).catch((err)=>{

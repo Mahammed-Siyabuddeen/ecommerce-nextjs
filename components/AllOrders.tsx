@@ -11,12 +11,14 @@ import { setAllorders, sortArray, sortarrayByStatus } from '@/features/adminOrde
 import { RootState } from '@/features/redux/store'
 
 const AllOrders = () => {
-    const dispatch = useDispatch()
-    const allOrders = useSelector((state: RootState) => state.allOrders)
+    
+    const dispatch = useDispatch();
+    const allOrders = useSelector((state: RootState) => state.allOrders);
     const [isOpen, setIsOpen] = useState(false)
     const [loading, setLoading] = useState(false);
     const [sortorder, setSortOrder] = useState('asc');
-    const [currentOrder, setCurrentOrder] = useState<allOrderType>()
+    const [currentOrder, setCurrentOrder] = useState<allOrderType>();
+
     useEffect(() => {
         setLoading(true);
         getAllOrders().then(({ data }) => {

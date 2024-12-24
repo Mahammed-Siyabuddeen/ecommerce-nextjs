@@ -15,11 +15,11 @@ import { clearAdmin } from '@/features/adminSlice'
 import { useRouter } from 'next/navigation'
 
 const DashboardLeft: FC = () => {
-    const Dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch<AppDispatch>();
     const router=useRouter()
     const handleAdminLogout = () => {
         if(!window.confirm("Are you sure you want to log out?"))  return;
-        Dispatch(clearAdmin())
+        dispatch(clearAdmin())
         router.push("/");
     }
     return (

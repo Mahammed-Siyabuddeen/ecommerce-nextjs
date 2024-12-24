@@ -22,7 +22,7 @@ const Signup = () => {
     const [rpassword, setrpassword] = useState('')
     const [checkinput, setcheckinput] = useState(false)
 
-    const Dispatch = useDispatch<AppDispatch>();
+    const dispatch = useDispatch<AppDispatch>();
     const router = useRouter()
     const handlesubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -39,7 +39,7 @@ const Signup = () => {
         
 
         SignUpApi({ ...data }).then(({ data }) => {
-            Dispatch(setUser(data));
+            dispatch(setUser(data));
             router.push('/')
         }).catch((err) => {
             ApiErrorResponse(err)

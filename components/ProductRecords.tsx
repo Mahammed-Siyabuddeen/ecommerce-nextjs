@@ -14,26 +14,26 @@ interface prop{
     setAddproduct:React.Dispatch<React.SetStateAction<boolean>>
 }
 const ProductRecords = ({setAddproduct}:prop) => {
-    const Dispatch=useDispatch<AppDispatch>()
+    const dispatch=useDispatch<AppDispatch>()
     const [sortOrder,setSortOrder]=useState('asc')
     const orders=useSelector((state:RootState)=>state.allProducts)
     const switchToAddProduct=()=>{
         setAddproduct(true);
     }
     const changesortSales=()=>{
-        Dispatch(allProductSortBySales(sortOrder))
+        dispatch(allProductSortBySales(sortOrder))
         setSortOrder(sortOrder==='asc'?'desc':'asc')
     }
     const changesortQuantity=()=>{
-        Dispatch(allProductSortByQuanity(sortOrder))
+        dispatch(allProductSortByQuanity(sortOrder))
         setSortOrder(sortOrder==='asc'?'desc':'asc')
 
     }
     useEffect(()=>{
         getAllProducts().then(({data})=>{
-            Dispatch(setAllProdcuts(data))
+            dispatch(setAllProdcuts(data))
         }).catch((error)=>ApiErrorResponse(error))
-    },[setAddproduct,Dispatch])
+    },[setAddproduct,dispatch])
 
     return (
         <div className="w-full overflow-x-scroll">

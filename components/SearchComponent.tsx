@@ -10,12 +10,11 @@ import { getAllProductsapi } from '@/Services/products.services'
 import { PriceRangeType } from './Types/priceRange'
 import { productType } from './Types/productType'
 import { useSearchParams, useRouter } from 'next/navigation'
-import { AnimatePresence,motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Search = () => {
     const [data, setData] = useState<productType[]>([])
     const [priceRange, setPriceRange] = useState<PriceRangeType>()
-    const router = useRouter()
     const [loading, setLoading] = useState(true)
     const searchParams = useSearchParams();
     const [size, setSize] = useState<string | undefined>(undefined);
@@ -39,12 +38,16 @@ const Search = () => {
                         acc.max = product.price;
                     }
                     return acc;
-                }, { min: Infinity, max: -Infinity });
+                }, { min: 0, max: 0 });
                 setPriceRange(minAndMax)
             })
-            .catch((err) => console.log(err)
+            .catch((err) =>
+                console.log(err)
             )
-        setLoading(false)
+            .finally(() => {
+
+                setLoading(false)
+            })
     }, [searchParams])
 
     useEffect(() => {
@@ -58,7 +61,7 @@ const Search = () => {
             .catch((err) => console.log(err)
             )
         setLoading(false)
-    }, [price, size, rating, brand])
+    }, [price, size, rating, brand, searchParams])
 
     const clearFilter = () => {
         setBrand(undefined);
@@ -68,20 +71,21 @@ const Search = () => {
 
     }
 
-    const variants={
-        open:{opacity:1,x:0,transition:{duration:0.3}},
-        close:{opacity:0,x:"-100%",transition:{duration:0.3}}
+    const variants = {
+        open: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+        close: { opacity: 0, x: "-100%", transition: { duration: 0.3 } }
     }
+
 
     if (mobileFilterOpen)
         return (
             <AnimatePresence>
                 <motion.div
-                initial="close"
-                animate="open"
-                exit="close"
-                variants={variants}
-                className='w-screen flex flex-col  h-screen bg-yellow-400  text-slate-950'>
+                    initial="close"
+                    animate="open"
+                    exit="close"
+                    variants={variants}
+                    className='w-screen flex flex-col  h-screen bg-yellow-400  text-slate-950'>
                     <div className="w-full p-4 flex justify-between">
                         <h1 className="font-medium">Filter</h1>
                         <button className='cursor-pointer px-4' onClick={clearFilter}>Clear All</button>
@@ -90,7 +94,7 @@ const Search = () => {
                     <SizeFilter size={size} setSize={setSize} />
                     <RatingFilter rating={rating} setRating={setRating} />
                     <BrandFilter brand={brand} setBrand={setBrand} />
-                    <button onClick={()=>setMobileFilterOpen(false)} className="m-4 ml-auto bg-slate-950 text-white rounded px-4 py-2">Filter</button>
+                    <button onClick={() => setMobileFilterOpen(false)} className="m-4 ml-auto bg-slate-950 text-white rounded px-4 py-2">Filter</button>
                 </motion.div>
             </AnimatePresence>
         )
@@ -108,12 +112,16 @@ const Search = () => {
                 <BrandFilter brand={brand} setBrand={setBrand} />
             </div>
 
-            <button onClick={()=>setMobileFilterOpen(true)} className="ml-auto block md:hidden bg-yellow-400 text-slate-950 px-4 py-2 max-w-max rounded mx-4 cursor-pointer">Filters</button>
+            <button onClick={() => setMobileFilterOpen(true)} className="ml-auto block md:hidden bg-yellow-400 text-slate-950 px-4 py-2 max-w-max rounded mx-4 cursor-pointer">Filters</button>
 
             <div className="flex-1 md:basis-4/5  bg-gray-100 flex flex-col  gap-4 rounded p-4">
                 <>
                     {
-                        loading ? (<Loading />) : (<Products products={data} />)
+                        loading ?
+                            (<Loading />)
+                            : data.length == 0 ?
+                                (<h1 className='text-center font-bold text-2xl text-gray-500'>No Products Found</h1>)
+                                : (<Products products={data} />)
                     }
                 </>
             </div>

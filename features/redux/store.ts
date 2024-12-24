@@ -6,7 +6,6 @@ import cartSlice from "../cartSlice";
 import checkoutSlice from "../checkoutSlice";
 import addressSlice from "../addressSlice";
 import orderDetailsSlice from "../orderDetailsSlice";
-import AllOrders from "@/components/AllOrders";
 import adminOrderSlice from "../adminOrderSlice";
 import allProductsSlice from "../allProductsSlice";
 import dashboardSlice from "../dashboardSlice";
