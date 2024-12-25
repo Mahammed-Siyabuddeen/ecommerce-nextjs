@@ -5,6 +5,9 @@ This is an eCommerce project built using Next.js and Node.js. It includes essent
 # Demo 
 https://github.com/user-attachments/assets/0e36be22-367f-4f0f-96ff-4dcba0e2232c
 
+# live URL
+[frontend](https://pair-care.live/).
+[backend](https://ecommerce-nodejs-1-a79i.onrender.com)
 # Runing This Project
 To install this project, you should have Node.js.
 ## Feature of the Project
